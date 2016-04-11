@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:XamarinFormsDemo.Views;assembly=XamarinFormsDemo"
+             x:Class="XamarinFormsDemo.Views.MainPageView">
+  <StackLayout>
+    <Button Text="引导页面" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselPageView}"></Button>
+    <Button Text="轮播组件" VerticalOptions="Center"></Button>
+    <Button Text="地图建议搜索" VerticalOptions="Center"></Button>
+    <Button Text="行政区域联动" VerticalOptions="Center"></Button>
+  </StackLayout>
+</ContentPage>
