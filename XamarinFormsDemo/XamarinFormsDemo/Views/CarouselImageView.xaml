@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:carousel="clr-namespace:XamarinFormsDemo.Controls.Carousel;assembly=XamarinFormsDemo"
+             x:Class="XamarinFormsDemo.Views.CarouselImageView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="2*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <carousel:CarouselLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></carousel:CarouselLayout>
+    <Grid Grid.Row="1">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      <BoxView Color="Red" Grid.Row="0" Grid.Column="0"></BoxView>
+      <BoxView Color="Blue" Grid.Row="1" Grid.Column="0"></BoxView>
+      <BoxView Color="Green" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"></BoxView>
+    </Grid>
+  </Grid>
+</ContentPage>

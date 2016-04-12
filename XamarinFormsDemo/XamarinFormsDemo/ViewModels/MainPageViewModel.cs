@@ -21,10 +21,15 @@ namespace XamarinFormsDemo.ViewModels
 
         public async void GoToCommandHandler(Type parm)
         {
+            var navigationPage = SimpleIoc.Default.GetInstance<NavigationPage>(typeof(MainPageView).ToString());
+
             if (parm == typeof (CarouselPageView))
             {
-                var navigationPage = SimpleIoc.Default.GetInstance<NavigationPage>(typeof (MainPageView).ToString());
                 await navigationPage.PushAsync(new CarouselPageView());
+            }
+            else if(parm == typeof(CarouselImageView))
+            {
+                await navigationPage.PushAsync(new CarouselImageView());
             }
         }
     }
