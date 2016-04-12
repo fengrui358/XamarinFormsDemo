@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Views;
 
@@ -13,7 +13,10 @@ namespace XamarinFormsDemo
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new MainPageView());
+            var mainPage = new NavigationPage(new MainPageView());
+            SimpleIoc.Default.Register(() => mainPage, typeof (MainPageView).ToString());
+
+            MainPage = mainPage;
         }
 
         protected override void OnStart()

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using XamarinFormsDemo.Const;
 using XamarinFormsDemo.ViewModels;
 
 namespace XamarinFormsDemo.Views
@@ -16,6 +17,14 @@ namespace XamarinFormsDemo.Views
             InitializeComponent();
 
             BindingContext = new MainPageViewModel();
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            DeviceInfo.Width = width;
+            DeviceInfo.Height = height;
+
+            base.OnSizeAllocated(width, height);
         }
     }
 }
