@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:autoCompleteControl="clr-namespace:XamarinFormsDemo.Controls.AutoCompleteControl;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.Views.SearchSuggestView">
   <StackLayout>
     <Entry VerticalOptions="Start" HorizontalOptions="FillAndExpand" Placeholder="搜索" Text="{Binding SearchKeyWord}" TextChanged="Entry_OnTextChanged"></Entry>
@@ -9,7 +8,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ContentView>
-            <Label Text="{Binding}"></Label>
+            <Label Text="sdfa"></Label>
           </ContentView>
         </DataTemplate>
       </ListView.ItemTemplate>
