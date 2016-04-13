@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Const\DeviceInfo.cs" />
+    <Compile Include="Controls\AutoCompleteControl\AutoCompleteView.cs" />
     <Compile Include="Controls\Carousel\CarouselLayout.cs" />
     <Compile Include="Controls\Carousel\PagerIndicatorDots.cs" />
     <Compile Include="Controls\ImageModelView.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="ViewModels\CarouselImageViewModel.cs" />
     <Compile Include="ViewModels\CarouselPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchSuggestViewModel.cs" />
     <Compile Include="Views\BaiduMapView.xaml.cs">
       <DependentUpon>BaiduMapView.xaml</DependentUpon>
     </Compile>

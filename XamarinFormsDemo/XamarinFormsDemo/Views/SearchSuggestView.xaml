@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:autoCompleteControl="clr-namespace:XamarinFormsDemo.Controls.AutoCompleteControl;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.Views.SearchSuggestView">
-  <Label Text="关键字列表" VerticalOptions="Center" HorizontalOptions="Center" />
+  <StackLayout>
+    <Entry VerticalOptions="Start" HorizontalOptions="FillAndExpand" Placeholder="搜索" Text="{Binding SearchKeyWord}" TextChanged="Entry_OnTextChanged"></Entry>
+    <ListView ItemsSource="{Binding SuggestResults}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ContentView>
+            <Label Text="{Binding}"></Label>
+          </ContentView>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
 </ContentPage>
