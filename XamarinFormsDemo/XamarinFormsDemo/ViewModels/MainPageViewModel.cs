@@ -31,6 +31,10 @@ namespace XamarinFormsDemo.ViewModels
             {
                 await navigationPage.PushAsync(new CarouselImageView());
             }
+            else if(parm == typeof(BaiduMapView))
+            {
+                await navigationPage.PushAsync(new BaiduMapView());
+            }
         }
     }
 }

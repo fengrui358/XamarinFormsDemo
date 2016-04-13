@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
-using XamarinFormsDemo.Helper;
-using XamarinFormsDemo.Interface;
 
 namespace XamarinFormsDemo.Controls.Carousel
 {
@@ -18,7 +16,7 @@ namespace XamarinFormsDemo.Controls.Carousel
 		}
 
 		readonly StackLayout _stack;
-		IAdvancedTimer _selectedItemTimer;
+		//IAdvancedTimer _selectedItemTimer;
 
 		int _selectedIndex;
 
@@ -33,10 +31,8 @@ namespace XamarinFormsDemo.Controls.Carousel
 
 			Content = _stack;
 
-		    var s = TimerFactory.Current;
-
-            _selectedItemTimer = TimerFactory.GetAdvancedTimer();
-            _selectedItemTimer.InitTimer(300, SelectedItemTimerElapsed, false);
+            //_selectedItemTimer = TimerFactory.GetAdvancedTimer();
+            //_selectedItemTimer.InitTimer(300, SelectedItemTimerElapsed, false);
         }
 
 		public IndicatorStyleEnum IndicatorStyle { get; set; }
@@ -79,8 +75,8 @@ namespace XamarinFormsDemo.Controls.Carousel
 
 		void UpdateSelectedItem ()
 		{
-			_selectedItemTimer.StopTimer();
-			_selectedItemTimer.StartTimer();
+			//_selectedItemTimer.StopTimer();
+			//_selectedItemTimer.StartTimer();
 		}
 
 		void SelectedItemTimerElapsed (object sender, EventArgs e) {

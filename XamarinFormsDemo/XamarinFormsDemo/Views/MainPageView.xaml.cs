@@ -21,8 +21,8 @@ namespace XamarinFormsDemo.Views
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            DeviceInfo.Width = width;
-            DeviceInfo.Height = height;
+            DeviceInfo.Width = (int) width;
+            DeviceInfo.Height = (int) height;
 
             base.OnSizeAllocated(width, height);
         }

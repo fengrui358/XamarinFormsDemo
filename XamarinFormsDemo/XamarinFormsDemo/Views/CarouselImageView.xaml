@@ -8,7 +8,7 @@
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="2*"></RowDefinition>
     </Grid.RowDefinitions>
-    <carousel:CarouselLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></carousel:CarouselLayout>
+    <ContentView x:Name="carouseContainer" Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></ContentView>
     <Grid Grid.Row="1">
       <Grid.RowDefinitions>
         <RowDefinition Height="*"></RowDefinition>

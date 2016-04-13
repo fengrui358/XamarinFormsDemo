@@ -39,12 +39,17 @@
     <Compile Include="Const\DeviceInfo.cs" />
     <Compile Include="Controls\Carousel\CarouselLayout.cs" />
     <Compile Include="Controls\Carousel\PagerIndicatorDots.cs" />
-    <Compile Include="Helper\TimerFactory.cs" />
-    <Compile Include="Interface\IAdvancedTimer.cs" />
+    <Compile Include="Controls\ImageModelView.cs" />
+    <Compile Include="Hybrid\HybridWebView.cs" />
+    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CarouselImageViewModel.cs" />
     <Compile Include="ViewModels\CarouselPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\BaiduMapView.xaml.cs">
+      <DependentUpon>BaiduMapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CarouselImageView.xaml.cs">
       <DependentUpon>CarouselImageView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +89,10 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.2.0.5-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
@@ -99,6 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\CarouselImageView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\BaiduMapView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

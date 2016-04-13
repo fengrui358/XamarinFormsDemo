@@ -21,9 +21,9 @@ namespace XamarinFormsDemo.Views
 
             var urls = new string[]
             {
-                $"http://7xswtn.com2.z0.glb.clouddn.com/06.jpg?imageView2/1/w/{DeviceInfo.WidthInteger}/h/{DeviceInfo.HeightInteger}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/01.jpg?imageView2/1/w/{DeviceInfo.WidthInteger}/h/{DeviceInfo.HeightInteger}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/03.jpg?imageView2/1/w/{DeviceInfo.WidthInteger}/h/{DeviceInfo.HeightInteger}/interlace/0/q/100"
+                $"http://7xswtn.com2.z0.glb.clouddn.com/06.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
+                $"http://7xswtn.com2.z0.glb.clouddn.com/01.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
+                $"http://7xswtn.com2.z0.glb.clouddn.com/03.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100"
             };
 
             var imageSource = new ImageSource[pageCount];

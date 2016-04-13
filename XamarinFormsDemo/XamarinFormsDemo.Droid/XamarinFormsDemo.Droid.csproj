@@ -69,6 +69,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="NLog">
       <HintPath>..\..\Lib\Android\NLog.dll</HintPath>
@@ -131,11 +132,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\XamarinFormsDemo\Helper\TimerFactory.cs">
-      <Link>Helper\TimerFactory.cs</Link>
-    </Compile>
-    <Compile Include="Helper\AdvancedTimerImplementation.cs" />
+    <AndroidAsset Include="Assets\HybridWeb\index.html" />
+    <Compile Include="Renderers\HybridWebViewRenderer.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\CarouselLayoutRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -157,6 +157,9 @@
     <ProjectReference Include="..\XamarinFormsDemo\XamarinFormsDemo.csproj">
       <Name>XamarinFormsDemo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.5-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.5-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
