@@ -152,17 +152,6 @@ namespace XamarinFormsDemo.Droid.Renderers
         {
             handler.Proceed();
         }
-
-        public override void OnReceivedError(WebView view, ClientError errorCode, string description, string failingUrl)
-        {
-            base.OnReceivedError(view, errorCode, description, failingUrl);
-
-
-        }
-
-
-
-
     }
 
     public class ValueCallback : IValueCallback

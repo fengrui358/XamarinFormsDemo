@@ -37,13 +37,9 @@ namespace XamarinFormsDemo.Controls.Carousel
 
 		public IndicatorStyleEnum IndicatorStyle { get; set; }
 
-		public IList<View> Children {
-			get {
-				return _stack.Children;
-			}
-		}
+		public IList<View> Children => _stack.Children;
 
-		private bool _layingOutChildren;
+	    private bool _layingOutChildren;
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
 			base.LayoutChildren (x, y, width, height);

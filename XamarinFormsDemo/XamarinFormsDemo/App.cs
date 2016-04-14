@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
+using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo
@@ -12,6 +13,8 @@ namespace XamarinFormsDemo
     {
         public App()
         {
+            AdministrativeRegionCache.Init();
+
             // The root page of your application
             var mainPage = new NavigationPage(new MainPageView());
             SimpleIoc.Default.Register(() => mainPage, typeof (MainPageView).ToString());

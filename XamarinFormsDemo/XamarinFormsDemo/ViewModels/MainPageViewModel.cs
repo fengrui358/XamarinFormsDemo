@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
+using XamarinFormsDemo.Controls.AreaSelectControl;
+using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo.ViewModels
@@ -21,7 +23,7 @@ namespace XamarinFormsDemo.ViewModels
 
         public async void GoToCommandHandler(Type parm)
         {
-            var navigationPage = SimpleIoc.Default.GetInstance<NavigationPage>(typeof(MainPageView).ToString());
+            var navigationPage = IocHelper.GetNavigationPage();
 
             if (parm == typeof (CarouselPageView))
             {
@@ -34,6 +36,10 @@ namespace XamarinFormsDemo.ViewModels
             else if(parm == typeof(BaiduMapView))
             {
                 await navigationPage.PushAsync(new BaiduMapView());
+            }
+            else if(parm == typeof(AreaSelectView))
+            {
+                await navigationPage.PushAsync(new AreaSelectView());
             }
         }
     }
