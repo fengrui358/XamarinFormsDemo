@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Controls.AreaSelectControl;
@@ -14,11 +15,11 @@ namespace XamarinFormsDemo.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public Command<Type> GoToCommand { get; private set; }
+        public RelayCommand<Type> GoToCommand { get; private set; }
 
         public MainPageViewModel()
         {
-            GoToCommand = new Command<Type>(GoToCommandHandler);
+            GoToCommand = new RelayCommand<Type>(GoToCommandHandler);
         }
 
         public async void GoToCommandHandler(Type parm)

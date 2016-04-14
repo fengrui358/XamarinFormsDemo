@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using Xamarin.Forms;
+using XamarinFormsDemo.Const;
+using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Hybrid;
+using XamarinFormsDemo.Models.APIModels;
 
 namespace XamarinFormsDemo.Views
 {
     public partial class BaiduMapView : ContentPage
     {
-        private RelativeLayout _relativeLayout;
+        private AbsoluteLayout _absoluteLayout;
         private Entry _searchEntry;
 
         public BaiduMapView()
@@ -19,7 +23,7 @@ namespace XamarinFormsDemo.Views
             InitializeComponent();
 
             //todo:使用xaml构建该页面
-            _relativeLayout = new RelativeLayout
+            _absoluteLayout = new AbsoluteLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
@@ -32,29 +36,43 @@ namespace XamarinFormsDemo.Views
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            _relativeLayout.Children.Add(hybirdWeb,
-                        Constraint.RelativeToParent((parent) => { return parent.X; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Y; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Height; })
-                    );
+            _absoluteLayout.Children.Add(hybirdWeb, new Rectangle(0, 0, DeviceInfo.Width, DeviceInfo.Height));
 
-            var _searchEntry = new Entry{HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.White, Placeholder = "搜索", TextColor = Color.Gray};
+            _searchEntry = new Entry{HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.White, Placeholder = "搜索"};
             _searchEntry.Focused += SearchEntryOnFocused;
 
-            _relativeLayout.Children.Add(_searchEntry, Constraint.RelativeToParent(parent => parent.X + 20),
-                Constraint.RelativeToParent(parent => parent.Y + 35),
-                Constraint.RelativeToParent(parent => parent.Width - 40), Constraint.Constant(45));
+            _absoluteLayout.Children.Add(_searchEntry, new Rectangle(20, 35, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
 
-            Content = _relativeLayout;
+            Content = _absoluteLayout;
+
+            Messenger.Default.Register<string>(this, MessengeToken.SearchCallBack, SearchKeyWordCallBack);
         }
 
         private async void SearchEntryOnFocused(object sender, FocusEventArgs focusEventArgs)
         {
             var keyWords = ((Entry) sender).Text;
 
-            var navigationPage = SimpleIoc.Default.GetInstance<NavigationPage>(typeof(MainPageView).ToString());
+            var navigationPage = IocHelper.GetNavigationPage();
             await navigationPage.PushAsync(new SearchSuggestView(keyWords));
+        }
+
+        private void SearchKeyWordCallBack(string searchKeyWords)
+        {
+            if (!string.IsNullOrEmpty(searchKeyWords))
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    _searchEntry.Text = searchKeyWords;
+                });
+
+                //todo:定位
+
+                //弹出门牌号输入
+                var registerEntry = new Entry { HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.White, Placeholder = "楼号/门牌号" };
+
+                _absoluteLayout.Children.Add(registerEntry,
+                    new Rectangle(20, 35 + 15 + _searchEntry.Height, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
+            }
         }
     }
 }

@@ -6,7 +6,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Models.APIModels;
@@ -18,26 +21,40 @@ namespace XamarinFormsDemo.ViewModels
         private Guid _searchSequenceKey;
 
         private string _searchKeyWords;
-        private List<BaiduJson.SuggestModel> _suggestResults; 
+        private List<BaiduJson.SuggestModel> _suggestResults;
+
+        private BaiduJson.SuggestModel _selectedItem;
 
         public string SearchKeyWords
         {
             get { return _searchKeyWords; }
             set
             {
-                var x = value;
                 Set(() => SearchKeyWords, ref _searchKeyWords, value);
             }
         }
 
-        /// <summary>
-        /// 用整组替换的方式，效率好些
-        /// </summary>
         public List<BaiduJson.SuggestModel> SuggestResults
         {
             get { return _suggestResults; }
             set { Set(() => SuggestResults, ref _suggestResults, value); }
-        } 
+        }
+
+        public BaiduJson.SuggestModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    //选中
+                    _selectedItem = value;
+
+                    SearchKeyWords = _selectedItem.Name;
+                    SearchCommandHandler();
+                }
+            }
+        }
 
         public SearchSuggestViewModel(string keyWords)
         {
@@ -57,6 +74,13 @@ namespace XamarinFormsDemo.ViewModels
             _searchSequenceKey = Guid.NewGuid();
 
             GetSuggestResult(newKeyWord, _searchSequenceKey);
+        }
+
+        public RelayCommand SearchCommand { get; private set; }
+
+        public SearchSuggestViewModel()
+        {
+            SearchCommand = new RelayCommand(SearchCommandHandler);
         }
 
         /// <summary>
@@ -97,6 +121,13 @@ namespace XamarinFormsDemo.ViewModels
             {
                 Debug.WriteLine(ex);
             }
-        } 
+        }
+
+        private async void SearchCommandHandler()
+        {
+            Messenger.Default.Send(SearchKeyWords, MessengeToken.SearchCallBack);
+
+            await IocHelper.GetNavigationPage().PopAsync();
+        }
     }
 }
