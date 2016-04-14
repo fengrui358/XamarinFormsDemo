@@ -1,23 +1,38 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
-        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"Î¢ÈíÑÅºÚ";}
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "å¾®è½¯é›…é»‘";
+        }
     </style>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=7rpFWBNykAOFEPs0NEnH3WSs"></script>
-    <title>µØÍ¼Õ¹Ê¾</title>
+    <title>åœ°å›¾</title>
 </head>
 <body>
     <div id="allmap"></div>
 </body>
 </html>
 <script type="text/javascript">
-	// °Ù¶ÈµØÍ¼API¹¦ÄÜ
-	var map = new BMap.Map("allmap");    // ´´½¨MapÊµÀı
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // ³õÊ¼»¯µØÍ¼,ÉèÖÃÖĞĞÄµã×ø±êºÍµØÍ¼¼¶±ğ
-	map.addControl(new BMap.MapTypeControl());   //Ìí¼ÓµØÍ¼ÀàĞÍ¿Ø¼ş
-	map.setCurrentCity("±±¾©");          // ÉèÖÃµØÍ¼ÏÔÊ¾µÄ³ÇÊĞ ´ËÏîÊÇ±ØĞëÉèÖÃµÄ
-	map.enableScrollWheelZoom(true);     //¿ªÆôÊó±ê¹öÂÖËõ·Å
+    //ç™¾åº¦åœ°å›¾APIåŠŸèƒ½
+    function loadJScript() {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://api.map.baidu.com/api?v=2.0&ak=7rpFWBNykAOFEPs0NEnH3WSs&callback=init";
+        document.body.appendChild(script);
+    }
+    function init() {
+        var map = new BMap.Map("allmap");            // åˆ›å»ºMapå®ä¾‹
+        var point = new BMap.Point(116.404, 39.915); // åˆ›å»ºç‚¹åæ ‡
+        map.centerAndZoom(point, 11);
+        map.addControl(new BMap.MapTypeControl());   //æ·»åŠ åœ°å›¾ç±»å‹æ§ä»¶
+        map.setCurrentCity("åŒ—äº¬");          // è®¾ç½®åœ°å›¾æ˜¾ç¤ºçš„åŸå¸‚ æ­¤é¡¹æ˜¯å¿…é¡»è®¾ç½®çš„
+        map.enableScrollWheelZoom();                 //å¯ç”¨æ»šè½®æ”¾å¤§ç¼©å°
+    }
+    window.onload = loadJScript;  //å¼‚æ­¥åŠ è½½åœ°å›¾
 </script>
