@@ -39,10 +39,10 @@
     <Compile Include="Const\AppInfo.cs" />
     <Compile Include="Const\DeviceInfo.cs" />
     <Compile Include="Const\MessengeToken.cs" />
-    <Compile Include="Controls\AreaSelectControl\AreaSelectPane.xaml.cs">
-      <DependentUpon>AreaSelectPane.xaml</DependentUpon>
+    <Compile Include="Controls\AreaSelectedControl\AreaSelectedPane.xaml.cs">
+      <DependentUpon>AreaSelectedPane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\AreaSelectControl\AreaSelectPaneViewModel.cs" />
+    <Compile Include="Controls\AreaSelectedControl\AreaSelectedPaneViewModel.cs" />
     <Compile Include="Controls\Carousel\CarouselLayout.cs" />
     <Compile Include="Controls\Carousel\PagerIndicatorDots.cs" />
     <Compile Include="Controls\ImageModelView.cs" />
@@ -55,13 +55,13 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UiConvert\SuggestModelConvert.cs" />
-    <Compile Include="ViewModels\AreaSelectViewModel.cs" />
+    <Compile Include="ViewModels\AreaSelectedViewModel.cs" />
     <Compile Include="ViewModels\CarouselImageViewModel.cs" />
     <Compile Include="ViewModels\CarouselPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\SearchSuggestViewModel.cs" />
-    <Compile Include="Views\AreaSelectView.xaml.cs">
-      <DependentUpon>AreaSelectView.xaml</DependentUpon>
+    <Compile Include="Views\AreaSelectedView.xaml.cs">
+      <DependentUpon>AreaSelectedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BaiduMapView.xaml.cs">
       <DependentUpon>BaiduMapView.xaml</DependentUpon>
@@ -156,13 +156,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\AreaSelectView.xaml">
+    <EmbeddedResource Include="Views\AreaSelectedView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controls\AreaSelectControl\AreaSelectPane.xaml">
+    <EmbeddedResource Include="Controls\AreaSelectedControl\AreaSelectedPane.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

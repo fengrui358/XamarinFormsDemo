@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XamarinFormsDemo.ViewModels
 {
-    class AreaSelectViewModel
+    class AreaSelectedViewModel
     {
     }
 }

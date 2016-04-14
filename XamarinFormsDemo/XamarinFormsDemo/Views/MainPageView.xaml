@@ -7,6 +7,6 @@
     <Button Text="引导页面" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselPageView}"></Button>
     <Button Text="轮播组件" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselImageView}"></Button>
     <Button Text="地图建议搜索" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:BaiduMapView}"></Button>
-    <Button Text="行政区域联动" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectView}"></Button>
+    <Button Text="行政区域联动" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}"></Button>
   </StackLayout>
 </ContentPage>

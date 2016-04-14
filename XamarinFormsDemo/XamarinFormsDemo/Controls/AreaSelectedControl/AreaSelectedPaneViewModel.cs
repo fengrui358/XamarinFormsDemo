@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Helpers;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Models;
 
-namespace XamarinFormsDemo.Controls.AreaSelectControl
+namespace XamarinFormsDemo.Controls.AreaSelectedControl
 {
-    public class AreaSelectPaneViewModel : ViewModelBase
+    public class AreaSelectedPaneViewModel : ViewModelBase
     {
+        #region 字段
+
         private List<AdministrativeRegion> _provinceList;
         private List<AdministrativeRegion> _cityList;
         private List<AdministrativeRegion> _counyList;
@@ -18,6 +22,11 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
         private AdministrativeRegion _provinceSelectedItem;
         private AdministrativeRegion _citySelectedItem;
         private AdministrativeRegion _counySelectedItem;
+
+        #endregion
+
+
+        #region 属性
 
         public List<AdministrativeRegion> ProvinceList
         {
@@ -27,9 +36,9 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
                 if (value != null && _provinceList != value)
                 {
                     _provinceList = value;
-
-                    ProvinceSelectedItem = _provinceList.First();
+                   
                     RaisePropertyChanged();
+                    ProvinceSelectedItem = _provinceList.First();
                 }
             }
         }
@@ -42,10 +51,9 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
                 if (value != null && _provinceSelectedItem != value)
                 {
                     _provinceSelectedItem = value;
-
-                    //联动城市
-                    CityList = _provinceSelectedItem.Children;
+                    
                     RaisePropertyChanged();
+                    CityList = _provinceSelectedItem.Children;
                 }
             }
         }
@@ -59,8 +67,8 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
                 {
                     _cityList = value;
 
-                    CitySelectedItem = _cityList.First();
                     RaisePropertyChanged();
+                    CitySelectedItem = _cityList.First();
                 }
             }
         }
@@ -74,8 +82,8 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
                 {
                     _citySelectedItem = value;
 
-                    CounyList = _citySelectedItem.Children;
                     RaisePropertyChanged();
+                    CounyList = _citySelectedItem.Children;
                 }
             }
         }
@@ -89,8 +97,8 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
                 {
                     _counyList = value;
 
-                    CounySelectedItem = _counyList.First();
                     RaisePropertyChanged();
+                    CounySelectedItem = _counyList.First();
                 }
             }
         }
@@ -101,9 +109,42 @@ namespace XamarinFormsDemo.Controls.AreaSelectControl
             set { Set(() => CounySelectedItem, ref _counySelectedItem, value); }
         }
 
-        public AreaSelectPaneViewModel()
+        #endregion
+
+        #region 命令
+
+        public RelayCommand OkCommand { get; private set; }
+
+        #endregion
+
+        #region 委托
+
+        public WeakAction<string> SelectedCallBack;
+
+        #endregion
+
+        #region 构造
+
+        public AreaSelectedPaneViewModel()
         {
             ProvinceList = AdministrativeRegionCache.AdministrativeRegionList.ToList();
+
+            OkCommand = new RelayCommand(OkCommandHandler);
         }
+
+        #endregion
+
+        #region 私有方法
+
+        private async void OkCommandHandler()
+        {
+            if (SelectedCallBack != null && SelectedCallBack.IsAlive)
+            {
+                SelectedCallBack.ExecuteWithObject(
+                    $"{ProvinceSelectedItem.AreaName}{CitySelectedItem.AreaName}{CounySelectedItem.AreaName}");
+            }
+        }
+
+        #endregion
     }
 }

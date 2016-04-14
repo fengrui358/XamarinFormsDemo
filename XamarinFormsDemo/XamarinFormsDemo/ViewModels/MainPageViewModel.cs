@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Ioc;
-using Xamarin.Forms;
-using XamarinFormsDemo.Controls.AreaSelectControl;
 using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Views;
 
@@ -50,9 +43,9 @@ namespace XamarinFormsDemo.ViewModels
             {
                 await navigationPage.PushAsync(new BaiduMapView());
             }
-            else if (parm == typeof (AreaSelectView))
+            else if (parm == typeof (AreaSelectedView))
             {
-                await navigationPage.PushAsync(new AreaSelectView());
+                await navigationPage.PushAsync(new AreaSelectedView());
             }
         }
 
