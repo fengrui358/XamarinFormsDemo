@@ -7,9 +7,9 @@
     <ListView ItemsSource="{Binding SuggestResults}">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <ContentView>
-            <Label Text="sdfa"></Label>
-          </ContentView>
+          <ViewCell>
+            <Label Text="{Binding Name}"></Label>
+          </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>

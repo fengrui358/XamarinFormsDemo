@@ -41,7 +41,7 @@ namespace XamarinFormsDemo.ViewModels
 
         public SearchSuggestViewModel(string keyWords)
         {
-            SuggestResults = new List<BaiduJson.SuggestModel> {new BaiduJson.SuggestModel {Name = "sdfas"} };
+            SuggestResults = new List<BaiduJson.SuggestModel>();
             SearchKeyWords = keyWords;
             TextChangedHandler(keyWords);
         }
@@ -50,7 +50,7 @@ namespace XamarinFormsDemo.ViewModels
         {
             if (string.IsNullOrEmpty(newKeyWord))
             {
-                _suggestResults = new List<BaiduJson.SuggestModel>();
+                SuggestResults = new List<BaiduJson.SuggestModel>();
                 return;
             }
 
