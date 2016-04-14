@@ -15,8 +15,15 @@ namespace XamarinFormsDemo.Views
 {
     public partial class BaiduMapView : ContentPage
     {
+        #region 私有方法
+
         private AbsoluteLayout _absoluteLayout;
         private Entry _searchEntry;
+
+        #endregion
+
+
+        #region 构造
 
         public BaiduMapView()
         {
@@ -38,15 +45,26 @@ namespace XamarinFormsDemo.Views
 
             _absoluteLayout.Children.Add(hybirdWeb, new Rectangle(0, 0, DeviceInfo.Width, DeviceInfo.Height));
 
-            _searchEntry = new Entry{HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.White, Placeholder = "搜索"};
+            _searchEntry = new Entry
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                BackgroundColor = Color.White,
+                Placeholder = "搜索"
+            };
             _searchEntry.Focused += SearchEntryOnFocused;
 
-            _absoluteLayout.Children.Add(_searchEntry, new Rectangle(20, 35, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
+            _absoluteLayout.Children.Add(_searchEntry,
+                new Rectangle(20, 35, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
 
             Content = _absoluteLayout;
 
             Messenger.Default.Register<string>(this, MessengeToken.SearchCallBack, SearchKeyWordCallBack);
         }
+
+        #endregion
+
+
+        #region 私有方法
 
         private async void SearchEntryOnFocused(object sender, FocusEventArgs focusEventArgs)
         {
@@ -68,11 +86,19 @@ namespace XamarinFormsDemo.Views
                 //todo:定位
 
                 //弹出门牌号输入
-                var registerEntry = new Entry { HorizontalOptions = LayoutOptions.FillAndExpand, BackgroundColor = Color.White, Placeholder = "楼号/门牌号" };
+                var registerEntry = new Entry
+                {
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = Color.White,
+                    Placeholder = "楼号/门牌号"
+                };
 
                 _absoluteLayout.Children.Add(registerEntry,
                     new Rectangle(20, 35 + 15 + _searchEntry.Height, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
             }
         }
+
+        #endregion
+
     }
 }

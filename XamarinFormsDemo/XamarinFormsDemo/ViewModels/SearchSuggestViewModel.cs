@@ -18,6 +18,8 @@ namespace XamarinFormsDemo.ViewModels
 {
     public class SearchSuggestViewModel : ViewModelBase
     {
+        #region 字段
+
         private Guid _searchSequenceKey;
 
         private string _searchKeyWords;
@@ -25,13 +27,15 @@ namespace XamarinFormsDemo.ViewModels
 
         private BaiduJson.SuggestModel _selectedItem;
 
+        #endregion
+
+
+        #region 属性
+
         public string SearchKeyWords
         {
             get { return _searchKeyWords; }
-            set
-            {
-                Set(() => SearchKeyWords, ref _searchKeyWords, value);
-            }
+            set { Set(() => SearchKeyWords, ref _searchKeyWords, value); }
         }
 
         public List<BaiduJson.SuggestModel> SuggestResults
@@ -56,12 +60,31 @@ namespace XamarinFormsDemo.ViewModels
             }
         }
 
+        #endregion
+
+
+        #region 命令
+
+        public RelayCommand SearchCommand { get; private set; }
+
+        #endregion
+
+
+        #region 构造
+
         public SearchSuggestViewModel(string keyWords)
         {
             SuggestResults = new List<BaiduJson.SuggestModel>();
             SearchKeyWords = keyWords;
             TextChangedHandler(keyWords);
+
+            SearchCommand = new RelayCommand(SearchCommandHandler);
         }
+
+        #endregion
+
+
+        #region 公共方法
 
         public void TextChangedHandler(string newKeyWord)
         {
@@ -76,12 +99,10 @@ namespace XamarinFormsDemo.ViewModels
             GetSuggestResult(newKeyWord, _searchSequenceKey);
         }
 
-        public RelayCommand SearchCommand { get; private set; }
+        #endregion
 
-        public SearchSuggestViewModel()
-        {
-            SearchCommand = new RelayCommand(SearchCommandHandler);
-        }
+
+        #region 私有方法
 
         /// <summary>
         /// 查询并更新models
@@ -129,5 +150,8 @@ namespace XamarinFormsDemo.ViewModels
 
             await IocHelper.GetNavigationPage().PopAsync();
         }
+
+        #endregion
+
     }
 }

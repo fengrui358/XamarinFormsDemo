@@ -15,8 +15,15 @@ namespace XamarinFormsDemo.Views
 {
     public partial class CarouselImageView : ContentPage
     {
+        #region 字段
+
         private RelativeLayout _relativeLayout;
         private CarouselLayout.IndicatorStyleEnum _indicatorStyle;
+
+        #endregion
+
+
+        #region 构造
 
         public CarouselImageView()
         {
@@ -35,23 +42,28 @@ namespace XamarinFormsDemo.Views
             var pagesCarousel = CreatePagesCarousel();
             //var dots = CreatePagerIndicatorContainer(); //todo：加点,自动轮播
             _relativeLayout.Children.Add(pagesCarousel,
-                        Constraint.RelativeToParent((parent) => { return parent.X; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Y; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Width; }),
-                        Constraint.RelativeToParent((parent) => { return parent.Height; })
-                    );
+                Constraint.RelativeToParent((parent) => { return parent.X; }),
+                Constraint.RelativeToParent((parent) => { return parent.Y; }),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; })
+                );
 
             carouseContainer.Content = _relativeLayout;
         }
 
-        CarouselLayout CreatePagesCarousel()
+        #endregion
+
+
+        #region 私有方法
+
+        private CarouselLayout CreatePagesCarousel()
         {
             var carousel = new CarouselLayout
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 IndicatorStyle = _indicatorStyle,
-                ItemTemplate = new DataTemplate(typeof(ImageModelView))
+                ItemTemplate = new DataTemplate(typeof (ImageModelView))
             };
 
             carousel.SetBinding(CarouselLayout.ItemsSourceProperty, "ImageModels");
@@ -59,5 +71,8 @@ namespace XamarinFormsDemo.Views
 
             return carousel;
         }
+
+        #endregion
+
     }
 }

@@ -12,8 +12,15 @@ namespace XamarinFormsDemo.ViewModels
 {
     public class CarouselImageViewModel : ViewModelBase
     {
+        #region 字段
+
         private List<ImageModel> _imageModels;
         private ImageModel _currentImage;
+
+        #endregion
+
+
+        #region 属性
 
         public List<ImageModel> ImageModels
         {
@@ -26,6 +33,11 @@ namespace XamarinFormsDemo.ViewModels
             get { return _currentImage; }
             set { Set(() => CurrentImage, ref _currentImage, value); }
         }
+
+        #endregion
+
+
+        #region 构造
 
         public CarouselImageViewModel()
         {
@@ -45,5 +57,8 @@ namespace XamarinFormsDemo.ViewModels
 
             ImageModels = temp;
         }
+
+        #endregion
+
     }
 }

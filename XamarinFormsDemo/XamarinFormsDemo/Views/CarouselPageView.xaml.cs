@@ -13,6 +13,8 @@ namespace XamarinFormsDemo.Views
 {
     public partial class CarouselPageView
     {
+        #region 构造
+
         public CarouselPageView()
         {
             InitializeComponent();
@@ -36,5 +38,8 @@ namespace XamarinFormsDemo.Views
                 Children.Add(new ContentPage {Content = new Image {Source = imageSource[i], Aspect = Aspect.Fill}});
             }
         }
+
+        #endregion
+
     }
 }

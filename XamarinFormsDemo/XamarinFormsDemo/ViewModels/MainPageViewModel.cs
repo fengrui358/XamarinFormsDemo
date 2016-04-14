@@ -15,14 +15,26 @@ namespace XamarinFormsDemo.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        #region 命令
+
         public RelayCommand<Type> GoToCommand { get; private set; }
+
+        #endregion
+
+
+        #region 构造
 
         public MainPageViewModel()
         {
             GoToCommand = new RelayCommand<Type>(GoToCommandHandler);
         }
 
-        public async void GoToCommandHandler(Type parm)
+        #endregion
+
+
+        #region 私有方法
+
+        private async void GoToCommandHandler(Type parm)
         {
             var navigationPage = IocHelper.GetNavigationPage();
 
@@ -30,18 +42,21 @@ namespace XamarinFormsDemo.ViewModels
             {
                 await navigationPage.PushAsync(new CarouselPageView());
             }
-            else if(parm == typeof(CarouselImageView))
+            else if (parm == typeof (CarouselImageView))
             {
                 await navigationPage.PushAsync(new CarouselImageView());
             }
-            else if(parm == typeof(BaiduMapView))
+            else if (parm == typeof (BaiduMapView))
             {
                 await navigationPage.PushAsync(new BaiduMapView());
             }
-            else if(parm == typeof(AreaSelectView))
+            else if (parm == typeof (AreaSelectView))
             {
                 await navigationPage.PushAsync(new AreaSelectView());
             }
         }
+
+        #endregion
+
     }
 }

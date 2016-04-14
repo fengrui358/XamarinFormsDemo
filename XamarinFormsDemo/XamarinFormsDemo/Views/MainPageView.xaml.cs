@@ -12,12 +12,19 @@ namespace XamarinFormsDemo.Views
 {
     public partial class MainPageView : ContentPage
     {
+        #region 构造
+
         public MainPageView()
         {
             InitializeComponent();
 
             BindingContext = new MainPageViewModel();
         }
+
+        #endregion
+
+
+        #region 私有方法
 
         protected override void OnSizeAllocated(double width, double height)
         {
@@ -26,5 +33,8 @@ namespace XamarinFormsDemo.Views
 
             base.OnSizeAllocated(width, height);
         }
+
+        #endregion
+
     }
 }
