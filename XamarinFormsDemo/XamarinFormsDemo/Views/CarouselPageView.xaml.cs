@@ -7,36 +7,91 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
+using XamarinFormsDemo.Controls;
+using XamarinFormsDemo.Controls.Carousel;
 using XamarinFormsDemo.ViewModels;
 
 namespace XamarinFormsDemo.Views
 {
-    public partial class CarouselPageView
+    public partial class CarouselPageView : ContentPage
     {
+        #region 字段
+
+        private RelativeLayout _relativeLayout;
+        private CarouselLayout.IndicatorStyleEnum _indicatorStyle;
+
+        #endregion
+
         #region 构造
 
         public CarouselPageView()
         {
             InitializeComponent();
 
-            var pageCount = 3;
+            BindingContext = new CarouselPageViewModel();
 
-            var urls = new string[]
+            _indicatorStyle = CarouselLayout.IndicatorStyleEnum.Dots;
+
+            _relativeLayout = new RelativeLayout
             {
-                $"http://7xswtn.com2.z0.glb.clouddn.com/06.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/01.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/03.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100"
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            var imageSource = new ImageSource[pageCount];
-            for (int i = 0; i < imageSource.Length; i++)
-            {
-                imageSource[i] = ImageSource.FromUri(new Uri(urls[i]));
-                ((UriImageSource) imageSource[i]).CachingEnabled = true;
-                ((UriImageSource) imageSource[i]).CacheValidity = TimeSpan.MaxValue;
+            var pagesCarousel = CreatePagesCarousel();
+            var dots = CreatePagerIndicatorContainer();
+            _relativeLayout.Children.Add(pagesCarousel,
+                Constraint.RelativeToParent((parent) => { return parent.X; }),
+                Constraint.RelativeToParent((parent) => { return parent.Y; }),
+                Constraint.RelativeToParent((parent) => { return parent.Width; }),
+                Constraint.RelativeToParent((parent) => { return parent.Height; })
+                );
 
-                Children.Add(new ContentPage {Content = new Image {Source = imageSource[i], Aspect = Aspect.Fill}});
-            }
+            _relativeLayout.Children.Add(dots,
+                        Constraint.Constant(0),
+                        Constraint.RelativeToView(pagesCarousel,
+                            (parent, sibling) => { return sibling.Height - 18; }),
+                        Constraint.RelativeToParent(parent => parent.Width),
+                        Constraint.Constant(18)
+                    );
+
+            carouseContainer.Content = _relativeLayout;
+        }
+
+        #endregion
+
+        #region 私有方法
+
+        private CarouselLayout CreatePagesCarousel()
+        {
+            var carousel = new CarouselLayout
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                IndicatorStyle = _indicatorStyle,
+                ItemTemplate = new DataTemplate(typeof(ImageModelView))
+            };
+
+            carousel.SetBinding(CarouselLayout.ItemsSourceProperty, "ImageModels");
+            carousel.SetBinding(CarouselLayout.SelectedItemProperty, "CurrentImage", BindingMode.TwoWay);
+
+            return carousel;
+        }
+
+        View CreatePagerIndicatorContainer()
+        {
+            return new StackLayout
+            {
+                Children = { CreatePagerIndicators() }
+            };
+        }
+
+        View CreatePagerIndicators()
+        {
+            var pagerIndicator = new PagerIndicatorDots { DotSize = 5, DotColor = Color.Black };
+            pagerIndicator.SetBinding(PagerIndicatorDots.ItemsSourceProperty, "ImageModels");
+            pagerIndicator.SetBinding(PagerIndicatorDots.SelectedItemProperty, "CurrentImage");
+            return pagerIndicator;
         }
 
         #endregion

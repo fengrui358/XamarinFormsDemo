@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:uiConvert="clr-namespace:XamarinFormsDemo.UiConvert;assembly=XamarinFormsDemo"
-             x:Class="XamarinFormsDemo.Views.SearchSuggestView">
+             x:Class="XamarinFormsDemo.Views.SearchSuggestView" Style="{StaticResource pageBaseStyle}">
   <ContentPage.Resources>
     <ResourceDictionary>
       <uiConvert:SuggestModelToAddressConvert x:Key="SuggestModelToAddressConvert"/>

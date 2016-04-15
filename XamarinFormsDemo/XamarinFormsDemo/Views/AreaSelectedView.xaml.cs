@@ -32,14 +32,20 @@ namespace XamarinFormsDemo.Views
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 Text = "省份/城市/区县/乡/村",
-                BackgroundColor = Color.White,
+                BackgroundColor = Color.White
             };
 
-            var container = new ContentView {Padding = new Thickness(10, 10, 10, 10), BackgroundColor = Color.White};
-            container.GestureRecognizers.Add(new TapGestureRecognizer {Command = new RelayCommand(ShowSelectedPane)});
-            container.Content = _label;
+            var frame = new Frame
+            {
+                HasShadow = false,
+                BackgroundColor = Color.White,
+                Padding = new Thickness(10, 10, 10, 10),
+                OutlineColor = Color.Gray
+            };
+            frame.GestureRecognizers.Add(new TapGestureRecognizer {Command = new RelayCommand(ShowSelectedPane)});
+            frame.Content = _label;
 
-            absoluteLayout.Children.Add(container, new Rectangle(0, 0, DeviceInfo.Width, AbsoluteLayout.AutoSize));
+            absoluteLayout.Children.Add(frame, new Rectangle(0, 0, DeviceInfo.Width, AbsoluteLayout.AutoSize));
         }
 
         #endregion

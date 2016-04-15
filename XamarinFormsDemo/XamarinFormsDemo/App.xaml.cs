@@ -23,8 +23,6 @@ namespace XamarinFormsDemo
             SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
 
             MainPage = mainPage;
-
-            //MainPage = new CarouselPageView();
         }
 
         protected override void OnStart()

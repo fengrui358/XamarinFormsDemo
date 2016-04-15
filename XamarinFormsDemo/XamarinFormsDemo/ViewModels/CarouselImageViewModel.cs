@@ -63,6 +63,5 @@ namespace XamarinFormsDemo.ViewModels
         }
 
         #endregion
-
     }
 }
