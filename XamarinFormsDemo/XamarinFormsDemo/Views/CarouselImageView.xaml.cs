@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace XamarinFormsDemo.Views
 
         private RelativeLayout _relativeLayout;
         private CarouselLayout.IndicatorStyleEnum _indicatorStyle;
+        private CarouselImageViewModel _viewModel;
 
         #endregion
 
@@ -31,7 +33,8 @@ namespace XamarinFormsDemo.Views
 
             _indicatorStyle = CarouselLayout.IndicatorStyleEnum.Dots;
 
-            BindingContext = new CarouselImageViewModel();
+            _viewModel = new CarouselImageViewModel();
+            BindingContext = _viewModel;
 
             _relativeLayout = new RelativeLayout
             {
@@ -40,7 +43,7 @@ namespace XamarinFormsDemo.Views
             };
 
             var pagesCarousel = CreatePagesCarousel();
-            var dots = CreatePagerIndicatorContainer(); //todo：自动轮播
+            var dots = CreatePagerIndicatorContainer();
             _relativeLayout.Children.Add(pagesCarousel,
                 Constraint.RelativeToParent((parent) => { return parent.X; }),
                 Constraint.RelativeToParent((parent) => { return parent.Y; }),
@@ -95,6 +98,39 @@ namespace XamarinFormsDemo.Views
             pagerIndicator.SetBinding(PagerIndicatorDots.ItemsSourceProperty, "ImageModels");
             pagerIndicator.SetBinding(PagerIndicatorDots.SelectedItemProperty, "CurrentImage");
             return pagerIndicator;
+        }
+
+        protected override void OnAppearing()
+        {
+            Carousel();
+            base.OnAppearing();
+        }
+
+        private async void Carousel()
+        {
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(2000);
+
+                    var index = _viewModel.ImageModels.IndexOf(_viewModel.CurrentImage);
+                    if (index == _viewModel.ImageModels.Count -1)
+                    {
+                        _viewModel.CurrentImage = _viewModel.ImageModels[0];
+                    }
+                    else
+                    {
+                        _viewModel.CurrentImage = _viewModel.ImageModels[++index];
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+
+                Carousel();
+            });
         }
 
         #endregion
