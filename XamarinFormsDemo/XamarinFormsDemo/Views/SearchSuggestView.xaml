@@ -13,7 +13,7 @@
       <Entry HorizontalOptions="FillAndExpand" Placeholder="输入地址" Text="{Binding SearchKeyWords}" TextChanged="Entry_OnTextChanged"></Entry>
       <Button HorizontalOptions="End" Text="搜索" Command="{Binding SearchCommand}"></Button>
     </StackLayout>
-    <ListView ItemsSource="{Binding SuggestResults}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+    <ListView ItemsSource="{Binding SuggestResults}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" HasUnevenRows="True">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
