@@ -91,6 +91,9 @@
     <StartupObject>XamarinFormsDemo.iOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\XamarinFormsDemo.Droid\Helper\AdvancedTimerImplementation.cs">
+      <Link>Helper\AdvancedTimerImplementation.cs</Link>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\CarouselLayoutRenderer.cs" />
@@ -166,9 +169,7 @@
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="..\XamarinFormsDemo.Droid\Assets\HybridWeb\index.html">
       <Link>HybridWeb\index.html</Link>

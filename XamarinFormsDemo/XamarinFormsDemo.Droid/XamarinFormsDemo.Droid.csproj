@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\HybridWeb\index.html" />
+    <Compile Include="Helper\AdvancedTimerImplementation.cs" />
     <Compile Include="Renderers\HybridWebViewRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\CarouselLayoutRenderer.cs" />
@@ -158,9 +159,7 @@
       <Name>XamarinFormsDemo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.2.0.5-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.2.0.5-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

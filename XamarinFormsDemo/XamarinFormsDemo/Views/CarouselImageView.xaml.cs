@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Controls;
 using XamarinFormsDemo.Controls.Carousel;
+using XamarinFormsDemo.Interface;
 using XamarinFormsDemo.Models;
 using XamarinFormsDemo.ViewModels;
 
@@ -22,6 +23,7 @@ namespace XamarinFormsDemo.Views
         private CarouselLayout.IndicatorStyleEnum _indicatorStyle;
         private CarouselImageViewModel _viewModel;
         private bool _isCurrentPage;
+        private IAdvancedTimer _timer;
 
         #endregion
 
@@ -62,6 +64,9 @@ namespace XamarinFormsDemo.Views
 
 
             carouseContainer.Content = _relativeLayout;
+
+            _timer = DependencyService.Get<IAdvancedTimer>(DependencyFetchTarget.NewInstance);
+            _timer.InitTimer(2000, Carousel, true);
         }
 
         #endregion
@@ -101,49 +106,38 @@ namespace XamarinFormsDemo.Views
             return pagerIndicator;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             _isCurrentPage = true;
-            Carousel();
+
+            await Task.Delay(100);
+            _timer.StartTimer();
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
             _isCurrentPage = false;
+            _timer.StopTimer();
             base.OnDisappearing();
         }
 
-        private async void Carousel()
+        private void Carousel(object sender, EventArgs args)
         {
             if (!_isCurrentPage)
             {
                 return;
             }
 
-            //await Task.Run(async () =>
-            //{
-            //    try
-            //    {
-            //        await Task.Delay(2000);
-
-            //        var index = _viewModel.ImageModels.IndexOf(_viewModel.CurrentImage);
-            //        if (index == _viewModel.ImageModels.Count -1)
-            //        {
-            //            _viewModel.CurrentImage = _viewModel.ImageModels[0];
-            //        }
-            //        else
-            //        {
-            //            _viewModel.CurrentImage = _viewModel.ImageModels[++index];
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Debug.WriteLine(ex);
-            //    }
-
-            //    Carousel();
-            //});
+            var index = _viewModel.ImageModels.IndexOf(_viewModel.CurrentImage);
+            if (index == _viewModel.ImageModels.Count - 1)
+            {
+                _viewModel.CurrentImage = _viewModel.ImageModels[0];
+            }
+            else
+            {
+                _viewModel.CurrentImage = _viewModel.ImageModels[++index];
+            }
         }
 
         #endregion
