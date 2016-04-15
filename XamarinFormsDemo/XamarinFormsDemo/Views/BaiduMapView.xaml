@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinFormsDemo.Views.BaiduMapView">
+             x:Class="XamarinFormsDemo.Views.BaiduMapView" Title="地图建议搜索">
   <!--<RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <hybrid:HybridWebView x:Name="hybridWebView" Uri="index.html" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
   </RelativeLayout>-->

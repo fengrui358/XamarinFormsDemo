@@ -19,7 +19,11 @@ namespace XamarinFormsDemo
             AdministrativeRegionCache.Init();
 
             // The root page of your application
-            var mainPage = new NavigationPage(new MainPageView());
+            var mainPage = new NavigationPage(new MainPageView())
+            {
+                BarBackgroundColor = Color.Black,
+                BarTextColor = Color.White
+            };
             SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
 
             MainPage = mainPage;
