@@ -56,6 +56,8 @@ namespace XamarinFormsDemo.ViewModels
             }
 
             ImageModels = temp;
+
+            CurrentImage = ImageModels.FirstOrDefault();
         }
 
         #endregion

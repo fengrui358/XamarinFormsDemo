@@ -16,7 +16,6 @@ namespace XamarinFormsDemo.Controls.Carousel
 		}
 
 		readonly StackLayout _stack;
-		//IAdvancedTimer _selectedItemTimer;
 
 		int _selectedIndex;
 
@@ -30,9 +29,6 @@ namespace XamarinFormsDemo.Controls.Carousel
 			};
 
 			Content = _stack;
-
-            //_selectedItemTimer = TimerFactory.GetAdvancedTimer();
-            //_selectedItemTimer.InitTimer(300, SelectedItemTimerElapsed, false);
         }
 
 		public IndicatorStyleEnum IndicatorStyle { get; set; }
@@ -55,10 +51,8 @@ namespace XamarinFormsDemo.Controls.Carousel
 				carousel => carousel.SelectedIndex,
 				0,
 				BindingMode.TwoWay,
-				propertyChanged: (bindable, oldValue, newValue) => {
-				((CarouselLayout)bindable).UpdateSelectedItem ();
-			}
-			);
+				propertyChanged: UpdateSelectedItem
+            );
 
 		public int SelectedIndex {
 			get {
@@ -69,15 +63,13 @@ namespace XamarinFormsDemo.Controls.Carousel
 			}
 		}
 
-		void UpdateSelectedItem ()
+		static void UpdateSelectedItem (BindableObject bindable, int oldValue, int newValue)
 		{
-			//_selectedItemTimer.StopTimer();
-			//_selectedItemTimer.StartTimer();
-		}
-
-		void SelectedItemTimerElapsed (object sender, EventArgs e) {
-			SelectedItem = SelectedIndex > -1 ? Children [SelectedIndex].BindingContext : null;
-		}
+		    var carouselLayout = (CarouselLayout) bindable;
+            carouselLayout.SelectedItem = carouselLayout.SelectedIndex > -1 ? carouselLayout.Children[carouselLayout.SelectedIndex].BindingContext : null;
+            //_selectedItemTimer.StopTimer();
+            //_selectedItemTimer.StartTimer();
+        }
 
 		public static readonly BindableProperty ItemsSourceProperty =
 			BindableProperty.Create<CarouselLayout, IList> (

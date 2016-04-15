@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
@@ -9,17 +10,21 @@ using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo
 {
-    public class App : Application
+    public partial class App : Application
     {
         public App()
         {
+            InitializeComponent();
+
             AdministrativeRegionCache.Init();
 
             // The root page of your application
             var mainPage = new NavigationPage(new MainPageView());
-            SimpleIoc.Default.Register(() => mainPage, typeof (MainPageView).ToString());
+            SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
 
             MainPage = mainPage;
+
+            //MainPage = new CarouselPageView();
         }
 
         protected override void OnStart()

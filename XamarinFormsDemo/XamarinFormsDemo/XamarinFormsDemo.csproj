@@ -35,7 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Const\AppInfo.cs" />
     <Compile Include="Const\DeviceInfo.cs" />
     <Compile Include="Const\MessengeToken.cs" />
@@ -163,6 +165,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\AreaSelectedControl\AreaSelectedPane.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

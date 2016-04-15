@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:XamarinFormsDemo.Views;assembly=XamarinFormsDemo"
-             x:Class="XamarinFormsDemo.Views.MainPageView">
-  <StackLayout>
+             x:Class="XamarinFormsDemo.Views.MainPageView" Style="{StaticResource pageBaseStyle}">
+  <StackLayout VerticalOptions="Center">
     <Button Text="引导页面" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselPageView}"></Button>
     <Button Text="轮播组件" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselImageView}"></Button>
     <Button Text="地图建议搜索" VerticalOptions="Center" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:BaiduMapView}"></Button>
