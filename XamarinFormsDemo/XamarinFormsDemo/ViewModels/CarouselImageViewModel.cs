@@ -41,18 +41,20 @@ namespace XamarinFormsDemo.ViewModels
 
         public CarouselImageViewModel()
         {
+            var height = DeviceInfo.Height / 3;
+
             var urls = new string[]
             {
-                $"http://7xswtn.com2.z0.glb.clouddn.com/06.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/01.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100",
-                $"http://7xswtn.com2.z0.glb.clouddn.com/03.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{DeviceInfo.Height}/interlace/0/q/100"
+                $"http://7xswtn.com2.z0.glb.clouddn.com/02.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{height}/interlace/0/q/100",
+                $"http://7xswtn.com2.z0.glb.clouddn.com/09.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{height}/interlace/0/q/100",
+                $"http://7xswtn.com2.z0.glb.clouddn.com/07.jpg?imageView2/1/w/{DeviceInfo.Width}/h/{height}/interlace/0/q/100"
             };
 
             var temp = new List<ImageModel>();
 
             for (int i = 0; i < urls.Length; i++)
             {
-                temp.Add(new ImageModel(urls[i]));
+                temp.Add(new ImageModel(new Uri(urls[i])));
             }
 
             ImageModels = temp;

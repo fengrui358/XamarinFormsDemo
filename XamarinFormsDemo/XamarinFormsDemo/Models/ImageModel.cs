@@ -9,15 +9,15 @@ namespace XamarinFormsDemo.Models
 {
     public class ImageModel
     {
-        public string Url { get; private set; }
+        public Uri Uri { get; private set; }
 
         public ImageSource ImageUrlSource
         {
             get
             {
-                if (!string.IsNullOrEmpty(Url))
+                if (Uri != null)
                 {
-                    var urlImageSource = ImageSource.FromUri(new Uri(Url));
+                    var urlImageSource = ImageSource.FromUri(Uri);
                     return urlImageSource;
                 }
 
@@ -25,9 +25,9 @@ namespace XamarinFormsDemo.Models
             }
         }
 
-        public ImageModel(string url)
+        public ImageModel(Uri uri)
         {
-            Url = url;
+            Uri = uri;
         }
     }
 }

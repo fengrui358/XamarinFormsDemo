@@ -40,7 +40,7 @@ namespace XamarinFormsDemo.Views
             };
 
             var pagesCarousel = CreatePagesCarousel();
-            var dots = CreatePagerIndicatorContainer(); //todo：加点,自动轮播
+            var dots = CreatePagerIndicatorContainer(); //todo：自动轮播
             _relativeLayout.Children.Add(pagesCarousel,
                 Constraint.RelativeToParent((parent) => { return parent.X; }),
                 Constraint.RelativeToParent((parent) => { return parent.Y; }),
@@ -91,7 +91,7 @@ namespace XamarinFormsDemo.Views
 
         View CreatePagerIndicators()
         {
-            var pagerIndicator = new PagerIndicatorDots() { DotSize = 5, DotColor = Color.Black };
+            var pagerIndicator = new PagerIndicatorDots { DotSize = 5, DotColor = Color.Black };
             pagerIndicator.SetBinding(PagerIndicatorDots.ItemsSourceProperty, "ImageModels");
             pagerIndicator.SetBinding(PagerIndicatorDots.SelectedItemProperty, "CurrentImage");
             return pagerIndicator;
