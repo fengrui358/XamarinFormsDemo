@@ -4,5 +4,5 @@
              x:Class="XamarinFormsDemo.Views.BaiduMapView" Title="地图建议搜索">
   <!--<RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
     <hybrid:HybridWebView x:Name="hybridWebView" Uri="index.html" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-  </RelativeLayout>-->
+  </RelativeLayout>-->  
 </ContentPage>
