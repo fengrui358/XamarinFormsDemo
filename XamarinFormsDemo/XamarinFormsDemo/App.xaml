@@ -6,12 +6,11 @@
     <ResourceDictionary>
       <Style x:Key="pageBaseStyle" TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="White"></Setter>
-        <Setter Property="Padding">
+        <!--<Setter Property="Padding">
           <Setter.Value>
             <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" Android="0,0,0,0" WinPhone="0,0,0,0"/>
           </Setter.Value>
-        </Setter>
-
+        </Setter>-->
       </Style>
       <Style TargetType="Button">
         <Setter Property="BackgroundColor" Value="White"></Setter>

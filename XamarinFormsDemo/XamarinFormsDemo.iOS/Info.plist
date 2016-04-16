@@ -23,7 +23,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>XamarinFormsDemo</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.action98.MobileMonitor</string>
+	<string>com.action98.testapp</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
