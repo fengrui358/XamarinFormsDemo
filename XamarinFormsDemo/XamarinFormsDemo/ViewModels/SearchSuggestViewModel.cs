@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Helper;
+using XamarinFormsDemo.Models;
 using XamarinFormsDemo.Models.APIModels;
 
 namespace XamarinFormsDemo.ViewModels
@@ -23,9 +24,9 @@ namespace XamarinFormsDemo.ViewModels
         private Guid _searchSequenceKey;
 
         private string _searchKeyWords;
-        private List<BaiduJson.SuggestModel> _suggestResults;
+        private List<BaiduJsonPlaceSuggestApiModel.SuggestModel> _suggestResults;
 
-        private BaiduJson.SuggestModel _selectedItem;
+        private BaiduJsonPlaceSuggestApiModel.SuggestModel _selectedItem;
 
         #endregion
 
@@ -35,16 +36,25 @@ namespace XamarinFormsDemo.ViewModels
         public string SearchKeyWords
         {
             get { return _searchKeyWords; }
-            set { Set(() => SearchKeyWords, ref _searchKeyWords, value); }
+            set
+            {
+                if (_searchKeyWords != value)
+                {
+                    _searchKeyWords = value;
+                    RaisePropertyChanged();
+
+                    SelectedItem = null;
+                }
+            }
         }
 
-        public List<BaiduJson.SuggestModel> SuggestResults
+        public List<BaiduJsonPlaceSuggestApiModel.SuggestModel> SuggestResults
         {
             get { return _suggestResults; }
             set { Set(() => SuggestResults, ref _suggestResults, value); }
         }
 
-        public BaiduJson.SuggestModel SelectedItem
+        public BaiduJsonPlaceSuggestApiModel.SuggestModel SelectedItem
         {
             get { return _selectedItem; }
             set
@@ -54,7 +64,8 @@ namespace XamarinFormsDemo.ViewModels
                     //选中
                     _selectedItem = value;
 
-                    SearchKeyWords = _selectedItem.Name;
+                    _searchKeyWords = _selectedItem.Name;
+                    RaisePropertyChanged(()=>SearchKeyWords);
                     SearchCommandHandler();
                 }
             }
@@ -74,7 +85,7 @@ namespace XamarinFormsDemo.ViewModels
 
         public SearchSuggestViewModel(string keyWords)
         {
-            SuggestResults = new List<BaiduJson.SuggestModel>();
+            SuggestResults = new List<BaiduJsonPlaceSuggestApiModel.SuggestModel>();
             SearchKeyWords = keyWords;
             TextChangedHandler(keyWords);
 
@@ -90,7 +101,7 @@ namespace XamarinFormsDemo.ViewModels
         {
             if (string.IsNullOrEmpty(newKeyWord))
             {
-                SuggestResults = new List<BaiduJson.SuggestModel>();
+                SuggestResults = new List<BaiduJsonPlaceSuggestApiModel.SuggestModel>();
                 return;
             }
 
@@ -115,7 +126,6 @@ namespace XamarinFormsDemo.ViewModels
             {
                 var encodekeyWord = StringHelper.UrlEncode(newKeyWord);
 
-                //todo:修改范围
                 var api =
                     $"http://api.map.baidu.com/place/v2/suggestion?query={encodekeyWord}&region=131&output=json&ak={AppInfo.BaiduMapAk}";
 
@@ -126,9 +136,9 @@ namespace XamarinFormsDemo.ViewModels
                 {
                     var json = await response.Content.ReadAsStringAsync();
 
-                    var objResluts = JsonConvert.DeserializeObject<BaiduJson>(json);
+                    var objResluts = JsonConvert.DeserializeObject<BaiduJsonPlaceSuggestApiModel>(json);
 
-                    if (objResluts != null && objResluts.Result != null)
+                    if (objResluts?.Result != null)
                     {
                         if (searchSequenceKey == _searchSequenceKey)
                         {
@@ -146,7 +156,20 @@ namespace XamarinFormsDemo.ViewModels
 
         private async void SearchCommandHandler()
         {
-            Messenger.Default.Send(SearchKeyWords, MessengeToken.SearchCallBack);
+            var result = new SearchSuggestModel();
+
+            if (SelectedItem != null)
+            {
+                result.KeyWords = SelectedItem.Name;
+                result.Lat = SelectedItem.Location.Lat;
+                result.Lng = SelectedItem.Location.Lng;
+            }
+            else
+            {
+                result.KeyWords = SearchKeyWords;
+            }
+
+            Messenger.Default.Send(result, MessengeToken.SearchCallBack);
 
             await IocHelper.GetNavigationPage().PopAsync();
         }

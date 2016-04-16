@@ -13,7 +13,7 @@ namespace XamarinFormsDemo.UiConvert
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var suggest = value as BaiduJson.SuggestModel;
+            var suggest = value as BaiduJsonPlaceSuggestApiModel.SuggestModel;
             if (suggest != null)
             {
                 return $"{suggest.City}{suggest.District}";

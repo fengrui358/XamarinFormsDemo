@@ -53,8 +53,9 @@
     <Compile Include="Hybrid\HybridWebView.cs" />
     <Compile Include="Interface\IAdvancedTimer.cs" />
     <Compile Include="Models\AdministrativeRegion.cs" />
-    <Compile Include="Models\APIModels\BaiduJson.cs" />
+    <Compile Include="Models\APIModels\BaiduJsonPlaceSuggestApiModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\SearchSuggestModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UiConvert\SuggestModelConvert.cs" />
