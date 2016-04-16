@@ -8,6 +8,6 @@
     <Button Text="轮播组件" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselImageView}"></Button>
     <Button Text="地图建议搜索" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:BaiduMapView}"></Button>
     <Button Text="行政区域联动" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}"></Button>
-    <Button Text="微信支付"></Button>
+    <!--<Button Text="微信支付"></Button>-->
   </StackLayout>
 </ContentPage>

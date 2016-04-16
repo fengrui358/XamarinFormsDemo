@@ -23,6 +23,9 @@
       <Style TargetType="Label">
         <Setter Property="TextColor" Value="Black"></Setter>
       </Style>
+      <Style TargetType="ListView">
+        <Setter Property="SeparatorVisibility" Value="None"></Setter>
+      </Style>
     </ResourceDictionary>
   </Application.Resources>
 </Application>

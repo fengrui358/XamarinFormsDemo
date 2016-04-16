@@ -15,7 +15,8 @@ namespace XamarinFormsDemo.Const
 
         public static int Height
         {
-            get { return Device.OS == TargetPlatform.iOS ? _height : _height - 20; }
+            //get { return Device.OS == TargetPlatform.iOS ? _height : _height - 20; }
+            get { return _height; }
             set { _height = value; }
         }
     }
