@@ -39,6 +39,11 @@ namespace XamarinFormsDemo.Const
                 {
                     _deviceId = value;
                     Application.Current.Properties[nameof(DeviceId)] = _deviceId;
+
+                    Task.Run(async () =>
+                    {
+                        await Application.Current.SavePropertiesAsync();
+                    });
                 }
             }
         }
