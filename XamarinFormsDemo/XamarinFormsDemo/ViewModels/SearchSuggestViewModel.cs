@@ -83,7 +83,7 @@ namespace XamarinFormsDemo.ViewModels
 
         #region 构造
 
-        public SearchSuggestViewModel(string keyWords)
+        public SearchSuggestViewModel(string keyWords, LocationModel position = null)
         {
             SuggestResults = new List<BaiduJsonPlaceSuggestApiModel.SuggestModel>();
             SearchKeyWords = keyWords;
@@ -129,21 +129,23 @@ namespace XamarinFormsDemo.ViewModels
                 var api =
                     $"http://api.map.baidu.com/place/v2/suggestion?query={encodekeyWord}&region=131&output=json&ak={AppInfo.BaiduMapAk}";
 
-                var httpClient = new HttpClient();
-                var response = await httpClient.GetAsync(api);
-
-                if (response.IsSuccessStatusCode)
+                using (var httpClient = new HttpClient())
                 {
-                    var json = await response.Content.ReadAsStringAsync();
+                    var response = await httpClient.GetAsync(api);
 
-                    var objResluts = JsonConvert.DeserializeObject<BaiduJsonPlaceSuggestApiModel>(json);
-
-                    if (objResluts?.Result != null)
+                    if (response.IsSuccessStatusCode)
                     {
-                        if (searchSequenceKey == _searchSequenceKey)
+                        var json = await response.Content.ReadAsStringAsync();
+
+                        var objResluts = JsonConvert.DeserializeObject<BaiduJsonPlaceSuggestApiModel>(json);
+
+                        if (objResluts?.Result != null)
                         {
-                            //转换此次结果
-                            SuggestResults = objResluts.Result;
+                            if (searchSequenceKey == _searchSequenceKey)
+                            {
+                                //转换此次结果
+                                SuggestResults = objResluts.Result;
+                            }
                         }
                     }
                 }

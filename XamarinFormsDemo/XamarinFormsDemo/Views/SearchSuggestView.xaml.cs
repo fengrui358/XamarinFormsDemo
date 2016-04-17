@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using XamarinFormsDemo.Models.APIModels;
 using XamarinFormsDemo.ViewModels;
 
 namespace XamarinFormsDemo.Views
@@ -20,7 +21,7 @@ namespace XamarinFormsDemo.Views
 
         #region 构造
 
-        public SearchSuggestView(string keyWords)
+        public SearchSuggestView(string keyWords, LocationModel position = null)
         {
             InitializeComponent();
 

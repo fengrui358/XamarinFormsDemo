@@ -146,22 +146,21 @@ namespace XamarinFormsDemo.Views
                     var api =
                         $"http://api.map.baidu.com/place/v2/search?query={encodekeyWord}&page_size=1&page_num=0&scope=1&region=131&output=json&ak={AppInfo.BaiduMapAk}";
 
-                    var httpClient = new HttpClient();
-                    var response = await httpClient.GetAsync(api);
-
-                    if (response.IsSuccessStatusCode)
+                    using (var httpClient = new HttpClient())
                     {
-                        var json = await response.Content.ReadAsStringAsync();
+                        var response = await httpClient.GetAsync(api);
 
-                        var objResluts = JsonConvert.DeserializeObject<BaiduJsonPlaceApiModel>(json);
-
-                        if (objResluts != null && objResluts.Results != null)
+                        if (response.IsSuccessStatusCode)
                         {
+                            var json = await response.Content.ReadAsStringAsync();
+
+                            var objResluts = JsonConvert.DeserializeObject<BaiduJsonPlaceApiModel>(json);
+
                             //转换此次结果
-                            var result = objResluts.Results.FirstOrDefault();
+                            var result = objResluts?.Results?.FirstOrDefault();
                             if (result != null)
                             {
-                                return new LocationModel {Lat = result.Location.Lat, Lng = result.Location.Lng};
+                                return new LocationModel { Lat = result.Location.Lat, Lng = result.Location.Lng };
                             }
                         }
                     }
