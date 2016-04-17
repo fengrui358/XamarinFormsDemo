@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Ioc;
+
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
-using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo
@@ -15,35 +14,17 @@ namespace XamarinFormsDemo
     {
         public App()
         {
-
             InitializeComponent();
 
-            // The root page of your application
             if (DeviceInfo.DeviceId == Guid.Empty)
             {
+                DeviceInfo.DeviceId = Guid.NewGuid();
                 MainPage = new LoadingView();
             }
             else
             {
-                MainPage = new MainPageView();
+                MainPage = new CarouselImageView();
             }
-
-            //MainPage = new MainPageView();
-        }
-
-        protected override void OnStart()
-        {
-            // Handle when your app starts
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
         }
     }
 }
