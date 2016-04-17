@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
+using XamarinFormsDemo.Helper;
 
 namespace XamarinFormsDemo.Views
 {
@@ -33,22 +34,29 @@ namespace XamarinFormsDemo.Views
                     }
                     else
                     {
-                        var mainPage = new NavigationPage(new CarouselImageView());
-
-                        if (Device.OS == TargetPlatform.iOS)
+                        if (SimpleIoc.Default.IsRegistered<MainPageView>())
                         {
-                            mainPage.BarBackgroundColor = Color.White;
-                            mainPage.BarTextColor = Color.Black;
+                            Application.Current.MainPage = IocHelper.GetNavigationPage();
                         }
-                        else if (Device.OS == TargetPlatform.Android)
+                        else
                         {
-                            mainPage.BarBackgroundColor = Color.Black;
-                            mainPage.BarTextColor = Color.White;
+                            var mainPage = new NavigationPage(new CarouselImageView());
+
+                            if (Device.OS == TargetPlatform.iOS)
+                            {
+                                mainPage.BarBackgroundColor = Color.White;
+                                mainPage.BarTextColor = Color.Black;
+                            }
+                            else if (Device.OS == TargetPlatform.Android)
+                            {
+                                mainPage.BarBackgroundColor = Color.Black;
+                                mainPage.BarTextColor = Color.White;
+                            }
+
+                            SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
+
+                            Application.Current.MainPage = mainPage;
                         }
-
-                        SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
-
-                        Application.Current.MainPage = mainPage;
                     }
                 });
             });

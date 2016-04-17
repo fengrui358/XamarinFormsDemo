@@ -181,9 +181,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Img\Default.jpg" />
     <EmbeddedResource Include="Resources\Img\Default.png" />
-    <EmbeddedResource Include="Resources\Img\拜托带fffef9.jpg" />
-    <EmbeddedResource Include="Resources\Img\拜托送fbf1aa.jpg" />
-    <EmbeddedResource Include="Resources\Img\拜托邮c2f3f7.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page1.xaml">

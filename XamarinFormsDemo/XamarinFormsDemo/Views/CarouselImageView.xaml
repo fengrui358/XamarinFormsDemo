@@ -25,21 +25,33 @@
           <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
           </TapGestureRecognizer>
         </ContentView.GestureRecognizers>
-        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托邮c2f3f7.jpg}" Aspect="AspectFit"></Image>  
+        <Image Aspect="AspectFit">
+          <Image.Source>
+            <UriImageSource Uri="http://7xswtn.com2.z0.glb.clouddn.com/%E6%8B%9C%E6%89%98%E9%82%AEc2f3f7.jpg" CacheValidity="{x:Static x:TimeSpan.MaxValue}" CachingEnabled="True"></UriImageSource>
+          </Image.Source>
+        </Image>  
       </ContentView>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fffef9" Grid.Row="1" Grid.Column="0">
         <ContentView.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
           </TapGestureRecognizer>
         </ContentView.GestureRecognizers>
-        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托带fffef9.jpg}" Aspect="AspectFit"></Image>
+        <Image Aspect="AspectFit">
+          <Image.Source>
+            <UriImageSource Uri="http://7xswtn.com2.z0.glb.clouddn.com/%E6%8B%9C%E6%89%98%E5%B8%A6fffef9.jpg" CacheValidity="{x:Static x:TimeSpan.MaxValue}" CachingEnabled="True"></UriImageSource>
+          </Image.Source>
+        </Image>
       </ContentView>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fbf1aa" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
         <ContentView.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
           </TapGestureRecognizer>
         </ContentView.GestureRecognizers>
-        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托送fbf1aa.jpg}" Aspect="AspectFit"></Image>
+        <Image Aspect="AspectFit">
+          <Image.Source>
+            <UriImageSource Uri="http://7xswtn.com2.z0.glb.clouddn.com/%E6%8B%9C%E6%89%98%E9%80%81fbf1aa.jpg" CacheValidity="{x:Static x:TimeSpan.MaxValue}" CachingEnabled="True"></UriImageSource>
+          </Image.Source>
+        </Image>
       </ContentView>      
     </Grid>
   </Grid>
