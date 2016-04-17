@@ -116,7 +116,7 @@ namespace XamarinFormsDemo.Views
                     {
                         await Task.Delay(400);
 
-                        var mainPage = new NavigationPage(new MainPageView());
+                        var mainPage = new NavigationPage(new CarouselImageView());
 
                         if (Device.OS == TargetPlatform.iOS)
                         {

@@ -26,11 +26,6 @@ namespace XamarinFormsDemo.Views
 
         #region 私有方法
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         #endregion
     }
 }

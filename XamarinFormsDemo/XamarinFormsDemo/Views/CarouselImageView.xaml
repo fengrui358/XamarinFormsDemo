@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:carousel="clr-namespace:XamarinFormsDemo.Controls.Carousel;assembly=XamarinFormsDemo"
+             xmlns:extensions="clr-namespace:XamarinFormsDemo.Extensions;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.Views.CarouselImageView" Style="{StaticResource pageBaseStyle}" Title="轮播组件">
   <Grid>
     <Grid.RowDefinitions>
@@ -18,9 +19,15 @@
         <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="*"></ColumnDefinition>
       </Grid.ColumnDefinitions>
-      <BoxView Color="Red" Grid.Row="0" Grid.Column="0"></BoxView>
-      <BoxView Color="Blue" Grid.Row="1" Grid.Column="0"></BoxView>
-      <BoxView Color="Green" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"></BoxView>
+      <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#c2f3f7" Grid.Row="0" Grid.Column="0">
+        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托邮c2f3f7.jpg}" Aspect="AspectFit"></Image>  
+      </ContentView>
+      <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fffef9" Grid.Row="1" Grid.Column="0">
+        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托带fffef9.jpg}" Aspect="AspectFit"></Image>
+      </ContentView>
+      <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fbf1aa" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+        <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托送fbf1aa.jpg}" Aspect="AspectFit"></Image>
+      </ContentView>      
     </Grid>
   </Grid>
 </ContentPage>
