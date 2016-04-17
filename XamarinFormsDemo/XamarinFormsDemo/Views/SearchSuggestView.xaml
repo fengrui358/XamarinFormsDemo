@@ -11,7 +11,7 @@
       <uiConvert:SuggestModelToAddressConvert x:Key="SuggestModelToAddressConvert"/>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <StackLayout Margin="10,0,10,0">
+  <StackLayout Padding="10,0,10,0">
     <StackLayout VerticalOptions="Start" Orientation="Horizontal">
       <Entry HorizontalOptions="FillAndExpand" Placeholder="输入地址" Text="{Binding SearchKeyWords}" TextChanged="Entry_OnTextChanged"></Entry>
       <Button HorizontalOptions="End" Text="搜索" Command="{Binding SearchCommand}"></Button>
@@ -20,7 +20,7 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Margin="10,10,10,0">
+            <StackLayout Padding="10,10,10,0">
               <Label Text="{Binding Name}"></Label>
               <Label Text="{Binding Converter={StaticResource SuggestModelToAddressConvert}}" FontSize="Micro" TextColor="Gray"></Label>
             </StackLayout>

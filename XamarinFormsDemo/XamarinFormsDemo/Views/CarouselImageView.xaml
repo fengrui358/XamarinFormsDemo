@@ -44,7 +44,7 @@
       </ContentView>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fbf1aa" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
         <ContentView.GestureRecognizers>
-          <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
+          <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:RegisterAddressView}">
           </TapGestureRecognizer>
         </ContentView.GestureRecognizers>
         <Image Aspect="AspectFit">

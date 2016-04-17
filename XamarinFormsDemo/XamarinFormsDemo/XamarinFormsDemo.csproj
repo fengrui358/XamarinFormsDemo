@@ -70,6 +70,7 @@
     <Compile Include="ViewModels\CarouselImageViewModel.cs" />
     <Compile Include="ViewModels\CarouselPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\RegisterAddressViewModel.cs" />
     <Compile Include="ViewModels\SearchSuggestViewModel.cs" />
     <Compile Include="Views\AreaSelectedView.xaml.cs">
       <DependentUpon>AreaSelectedView.xaml</DependentUpon>
@@ -88,6 +89,9 @@
     </Compile>
     <Compile Include="Views\MainPageView.xaml.cs">
       <DependentUpon>MainPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterAddressView.xaml.cs">
+      <DependentUpon>RegisterAddressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchSuggestView.xaml.cs">
       <DependentUpon>SearchSuggestView.xaml</DependentUpon>
@@ -190,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page2.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RegisterAddressView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

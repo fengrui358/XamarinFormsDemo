@@ -79,16 +79,14 @@ namespace XamarinFormsDemo.ViewModels
         {
             var navigationPage = IocHelper.GetNavigationPage();
 
-            await navigationPage.PushAsync(new AreaSelectedView());
-
-            //if (parm == typeof(CarouselPageView))
-            //{
-            //    await navigationPage.PushAsync(new CarouselPageView());
-            //}
-            //else if (parm == typeof(CarouselImageView))
-            //{
-            //    await navigationPage.PushAsync(new CarouselImageView());
-            //}
+            if (parm == typeof(AreaSelectedView))
+            {
+                await navigationPage.PushAsync(new AreaSelectedView());
+            }
+            else if (parm == typeof(RegisterAddressView))
+            {
+                await navigationPage.PushAsync(new RegisterAddressView());
+            }
             //else if (parm == typeof(BaiduMapView))
             //{
             //    await navigationPage.PushAsync(new BaiduMapView());
