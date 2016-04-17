@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Views;
@@ -16,15 +16,9 @@ namespace XamarinFormsDemo
         {
             InitializeComponent();
 
-            if (DeviceInfo.DeviceId == Guid.Empty)
-            {
-                DeviceInfo.DeviceId = Guid.NewGuid();
-                MainPage = new LoadingView();
-            }
-            else
-            {
-                MainPage = new CarouselImageView();
-            }
+            AdministrativeRegionCache.Init();
+
+            MainPage = new LoadingView();
         }
     }
 }

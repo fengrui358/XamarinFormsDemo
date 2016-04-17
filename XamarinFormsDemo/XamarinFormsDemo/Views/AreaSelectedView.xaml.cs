@@ -17,6 +17,7 @@ namespace XamarinFormsDemo.Views
 
         private AreaSelectedPane _areaSelectedPlane;
         private Label _label;
+        private BoxView _boxView;
 
         #endregion
 
@@ -46,6 +47,16 @@ namespace XamarinFormsDemo.Views
             frame.Content = _label;
 
             absoluteLayout.Children.Add(frame, new Rectangle(0, 0, DeviceInfo.Width, AbsoluteLayout.AutoSize));
+
+            _boxView = new BoxView
+            {
+                BackgroundColor = Color.FromRgba(128,128,128, 50),
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                IsVisible = false
+            };
+
+            absoluteLayout.Children.Add(_boxView, new Rectangle(0, 0, DeviceInfo.Width, DeviceInfo.Height - 300));
         }
 
         #endregion
@@ -55,6 +66,7 @@ namespace XamarinFormsDemo.Views
 
         private void ShowSelectedPane()
         {
+            _boxView.IsVisible = true;
             _areaSelectedPlane?.Show();
         }
 
@@ -79,11 +91,11 @@ namespace XamarinFormsDemo.Views
             {
                 _label.Text = result;
 
+                _boxView.IsVisible = false;
                 _areaSelectedPlane.Hide();
             });
         }
 
         #endregion
-
     }
 }

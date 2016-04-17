@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
+using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Models;
+using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo.ViewModels
 {
@@ -19,6 +22,11 @@ namespace XamarinFormsDemo.ViewModels
 
         #endregion
 
+        #region 命令
+
+        public RelayCommand<Type> GoToCommand { get; private set; }
+
+        #endregion
 
         #region 属性
 
@@ -36,11 +44,12 @@ namespace XamarinFormsDemo.ViewModels
 
         #endregion
 
-
         #region 构造
 
         public CarouselImageViewModel()
         {
+            GoToCommand = new RelayCommand<Type>(GoToCommandHandler);
+
             var height = DeviceInfo.Height / 3;
 
             var urls = new string[]
@@ -60,6 +69,34 @@ namespace XamarinFormsDemo.ViewModels
             ImageModels = temp;
 
             CurrentImage = ImageModels.FirstOrDefault();
+        }
+
+        #endregion
+
+        #region 私有方法
+
+        private async void GoToCommandHandler(Type parm)
+        {
+            var navigationPage = IocHelper.GetNavigationPage();
+
+            await navigationPage.PushAsync(new AreaSelectedView());
+
+            //if (parm == typeof(CarouselPageView))
+            //{
+            //    await navigationPage.PushAsync(new CarouselPageView());
+            //}
+            //else if (parm == typeof(CarouselImageView))
+            //{
+            //    await navigationPage.PushAsync(new CarouselImageView());
+            //}
+            //else if (parm == typeof(BaiduMapView))
+            //{
+            //    await navigationPage.PushAsync(new BaiduMapView());
+            //}
+            //else if (parm == typeof(AreaSelectedView))
+            //{
+            //    await navigationPage.PushAsync(new AreaSelectedView());
+            //}
         }
 
         #endregion

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:carousel="clr-namespace:XamarinFormsDemo.Controls.Carousel;assembly=XamarinFormsDemo"
              xmlns:extensions="clr-namespace:XamarinFormsDemo.Extensions;assembly=XamarinFormsDemo"
+             xmlns:views="clr-namespace:XamarinFormsDemo.Views;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.Views.CarouselImageView" Style="{StaticResource pageBaseStyle}" Title="轮播组件">
   <Grid>
     <Grid.RowDefinitions>
@@ -20,12 +21,24 @@
         <ColumnDefinition Width="*"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#c2f3f7" Grid.Row="0" Grid.Column="0">
+        <ContentView.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
+          </TapGestureRecognizer>
+        </ContentView.GestureRecognizers>
         <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托邮c2f3f7.jpg}" Aspect="AspectFit"></Image>  
       </ContentView>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fffef9" Grid.Row="1" Grid.Column="0">
+        <ContentView.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
+          </TapGestureRecognizer>
+        </ContentView.GestureRecognizers>
         <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托带fffef9.jpg}" Aspect="AspectFit"></Image>
       </ContentView>
       <ContentView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#fbf1aa" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+        <ContentView.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}">
+          </TapGestureRecognizer>
+        </ContentView.GestureRecognizers>
         <Image Source="{extensions:ImageResource XamarinFormsDemo.Resources.Img.拜托送fbf1aa.jpg}" Aspect="AspectFit"></Image>
       </ContentView>      
     </Grid>

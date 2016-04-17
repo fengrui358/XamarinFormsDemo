@@ -67,9 +67,7 @@ namespace XamarinFormsDemo.Views
         #region 私有方法
 
         protected override void OnAppearing()
-        {
-            AdministrativeRegionCache.Init();
-
+        {            
             base.OnAppearing();
         }
 
@@ -141,6 +139,5 @@ namespace XamarinFormsDemo.Views
         }
 
         #endregion
-
     }
 }

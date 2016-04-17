@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 
@@ -26,7 +26,30 @@ namespace XamarinFormsDemo.Views
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    Application.Current.MainPage = new CarouselPageView();
+                    if (DeviceInfo.DeviceId == Guid.Empty)
+                    {
+                        DeviceInfo.DeviceId = Guid.NewGuid();
+                        Application.Current.MainPage = new CarouselPageView();
+                    }
+                    else
+                    {
+                        var mainPage = new NavigationPage(new CarouselImageView());
+
+                        if (Device.OS == TargetPlatform.iOS)
+                        {
+                            mainPage.BarBackgroundColor = Color.White;
+                            mainPage.BarTextColor = Color.Black;
+                        }
+                        else if (Device.OS == TargetPlatform.Android)
+                        {
+                            mainPage.BarBackgroundColor = Color.Black;
+                            mainPage.BarTextColor = Color.White;
+                        }
+
+                        SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
+
+                        Application.Current.MainPage = mainPage;
+                    }
                 });
             });
 
