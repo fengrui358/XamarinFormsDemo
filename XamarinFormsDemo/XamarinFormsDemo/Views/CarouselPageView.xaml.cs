@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
-
+using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Controls;
@@ -20,6 +21,8 @@ namespace XamarinFormsDemo.Views
         private RelativeLayout _relativeLayout;
         private CarouselLayout.IndicatorStyleEnum _indicatorStyle;
 
+        private CarouselPageViewModel _viewModel = new CarouselPageViewModel();
+
         #endregion
 
         #region 构造
@@ -28,7 +31,8 @@ namespace XamarinFormsDemo.Views
         {
             InitializeComponent();
 
-            BindingContext = new CarouselPageViewModel();
+            BindingContext = _viewModel;
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
 
             _indicatorStyle = CarouselLayout.IndicatorStyleEnum.Dots;
 
@@ -62,6 +66,13 @@ namespace XamarinFormsDemo.Views
 
         #region 私有方法
 
+        protected override void OnAppearing()
+        {
+            AdministrativeRegionCache.Init();
+
+            base.OnAppearing();
+        }
+
         private CarouselLayout CreatePagesCarousel()
         {
             var carousel = new CarouselLayout
@@ -92,6 +103,41 @@ namespace XamarinFormsDemo.Views
             pagerIndicator.SetBinding(PagerIndicatorDots.ItemsSourceProperty, "ImageModels");
             pagerIndicator.SetBinding(PagerIndicatorDots.SelectedItemProperty, "CurrentImage");
             return pagerIndicator;
+        }
+
+        private void ViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName == "CurrentImage")
+            {
+                var lastOne = _viewModel.ImageModels.LastOrDefault();
+                if (lastOne == _viewModel.CurrentImage)
+                {
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(400);
+
+                        var mainPage = new NavigationPage(new MainPageView());
+
+                        if (Device.OS == TargetPlatform.iOS)
+                        {
+                            mainPage.BarBackgroundColor = Color.White;
+                            mainPage.BarTextColor = Color.Black;
+                        }
+                        else if (Device.OS == TargetPlatform.Android)
+                        {
+                            mainPage.BarBackgroundColor = Color.Black;
+                            mainPage.BarTextColor = Color.White;
+                        }
+
+                        SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
+
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            Application.Current.MainPage = mainPage;
+                        });
+                    });
+                }
+            }
         }
 
         #endregion

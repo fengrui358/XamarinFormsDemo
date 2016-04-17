@@ -13,14 +13,16 @@ namespace XamarinFormsDemo.Controls
     public class ImageModelView : ContentView
     {
         public ImageModelView()
-        {            
-            var imageSource = new UriImageSource();
+        {
+            var imageSource = new UriImageSource {CachingEnabled = true, CacheValidity = TimeSpan.MaxValue};
             imageSource.SetBinding(UriImageSource.UriProperty, "Uri");
 
             Content = new Image
             {
                 Source = imageSource,
-                Aspect = Aspect.Fill
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Aspect = Aspect.AspectFill
             };
         }
     }

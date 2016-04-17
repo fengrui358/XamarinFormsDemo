@@ -26,15 +26,11 @@ namespace XamarinFormsDemo.Views
 
         #region 私有方法
 
-        protected override void OnSizeAllocated(double width, double height)
+        protected override void OnAppearing()
         {
-            DeviceInfo.Width = (int) width;
-            DeviceInfo.Height = (int) height;
-
-            base.OnSizeAllocated(width, height);
+            base.OnAppearing();
         }
 
         #endregion
-
     }
 }

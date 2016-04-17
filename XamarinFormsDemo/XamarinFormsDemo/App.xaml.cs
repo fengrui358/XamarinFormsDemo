@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
 using Xamarin.Forms;
 using XamarinFormsDemo.Const;
+using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo
@@ -14,27 +15,20 @@ namespace XamarinFormsDemo
     {
         public App()
         {
+
             InitializeComponent();
 
-            AdministrativeRegionCache.Init();
-
             // The root page of your application
-            var mainPage = new NavigationPage(new MainPageView());
-
-            if (Device.OS == TargetPlatform.iOS)
+            if (DeviceInfo.DeviceId == Guid.Empty)
             {
-                mainPage.BarBackgroundColor = Color.White;
-                mainPage.BarTextColor = Color.Black;
+                MainPage = new LoadingView();
             }
-            else if (Device.OS == TargetPlatform.Android)
+            else
             {
-                mainPage.BarBackgroundColor = Color.Black;
-                mainPage.BarTextColor = Color.White;
+                MainPage = new MainPageView();
             }
-            
-            SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
 
-            MainPage = mainPage;
+            //MainPage = new MainPageView();
         }
 
         protected override void OnStart()

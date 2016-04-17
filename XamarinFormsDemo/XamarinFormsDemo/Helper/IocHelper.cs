@@ -13,6 +13,11 @@ namespace XamarinFormsDemo.Helper
     {
         public static NavigationPage GetNavigationPage()
         {
+            if (!SimpleIoc.Default.IsRegistered<NavigationPage>())
+            {
+                return null;
+            }
+
             return SimpleIoc.Default.GetInstance<NavigationPage>(typeof (MainPageView).ToString());
         }
     }

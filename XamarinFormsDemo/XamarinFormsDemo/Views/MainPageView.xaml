@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:XamarinFormsDemo.Views;assembly=XamarinFormsDemo"
              x:Class="XamarinFormsDemo.Views.MainPageView" Style="{StaticResource pageBaseStyle}" Title="首页">
   <StackLayout VerticalOptions="Center">
-    <Button Text="引导页面" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselPageView}"></Button>
+    <!--<Button Text="引导页面" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselPageView}"></Button>-->
     <Button Text="轮播组件" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:CarouselImageView}"></Button>
     <Button Text="地图建议搜索" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:BaiduMapView}"></Button>
     <Button Text="行政区域联动" Command="{Binding GoToCommand}" CommandParameter="{x:Type views:AreaSelectedView}"></Button>

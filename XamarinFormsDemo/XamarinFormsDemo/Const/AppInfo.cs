@@ -29,19 +29,23 @@ namespace XamarinFormsDemo.Const
 
         public static async void Init()
         {
-            await Task.Run(() =>
+            if (AdministrativeRegionList == null || !AdministrativeRegionList.Any())
             {
-                using (var stream = typeof (AdministrativeRegion).GetTypeInfo()
-                    .Assembly.GetManifestResourceStream($"{AppInfo.ResourceNameSpace}AdministrativeRegionInfo.json"))
+                await Task.Run(() =>
                 {
-                    using (var streamReader = new StreamReader(stream))
+                    using (var stream = typeof(AdministrativeRegion).GetTypeInfo()
+                        .Assembly.GetManifestResourceStream($"{AppInfo.ResourceNameSpace}AdministrativeRegionInfo.json"))
                     {
-                        var json = streamReader.ReadToEnd();
+                        using (var streamReader = new StreamReader(stream))
+                        {
+                            var json = streamReader.ReadToEnd();
 
-                        AdministrativeRegionList = JsonConvert.DeserializeObject<List<AdministrativeRegion>>(json);
+                            AdministrativeRegionList = JsonConvert.DeserializeObject<List<AdministrativeRegion>>(json);
+                        }
                     }
-                }
-            });
+                });
+            }
+
         }
     }
 }
