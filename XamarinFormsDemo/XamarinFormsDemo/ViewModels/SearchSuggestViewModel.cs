@@ -14,6 +14,7 @@ using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Models;
 using XamarinFormsDemo.Models.APIModels;
+using XamarinFormsDemo.Views;
 
 namespace XamarinFormsDemo.ViewModels
 {
@@ -64,9 +65,12 @@ namespace XamarinFormsDemo.ViewModels
                     //选中
                     _selectedItem = value;
 
-                    _searchKeyWords = _selectedItem.Name;
-                    RaisePropertyChanged(()=>SearchKeyWords);
-                    SearchCommandHandler();
+                    if (_selectedItem != null)
+                    {
+                        _searchKeyWords = _selectedItem.Name;
+                        RaisePropertyChanged(() => SearchKeyWords);
+                        SearchCommandHandler();
+                    }
                 }
             }
         }
@@ -126,8 +130,20 @@ namespace XamarinFormsDemo.ViewModels
             {
                 var encodekeyWord = StringHelper.UrlEncode(newKeyWord);
 
+                var city = string.Empty;
+                if (!string.IsNullOrEmpty(PositionHelper.City))
+                {
+                    city = StringHelper.UrlEncode(PositionHelper.City);
+                }
+                else
+                {
+                    city = "131";
+                }
+
+                Debug.WriteLine("定位城市" + PositionHelper.City);
+
                 var api =
-                    $"http://api.map.baidu.com/place/v2/suggestion?query={encodekeyWord}&region=131&output=json&ak={AppInfo.BaiduMapAk}";
+                    $"http://api.map.baidu.com/place/v2/suggestion?query={encodekeyWord}&region={city}&output=json&ak={AppInfo.BaiduMapAk}";
 
                 using (var httpClient = new HttpClient())
                 {
@@ -171,9 +187,11 @@ namespace XamarinFormsDemo.ViewModels
                 result.KeyWords = SearchKeyWords;
             }
 
-            Messenger.Default.Send(result, MessengeToken.SearchCallBack);
+            //Messenger.Default.Send(result, MessengeToken.SearchCallBack);
 
-            await IocHelper.GetNavigationPage().PopAsync();
+            //await IocHelper.GetNavigationPage().PopAsync();
+
+            await IocHelper.GetNavigationPage().PushAsync(new BaiduMapView(result));
         }
 
         #endregion

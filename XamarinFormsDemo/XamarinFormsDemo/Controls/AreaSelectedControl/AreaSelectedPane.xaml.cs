@@ -15,6 +15,10 @@ namespace XamarinFormsDemo.Controls.AreaSelectedControl
 
         public WeakAction<string> SelectedCallBack;
 
+        public WeakAction ShowWeakAction;
+
+        public WeakAction HideWeakAction;
+
         #endregion
 
         #region 构造
@@ -43,6 +47,8 @@ namespace XamarinFormsDemo.Controls.AreaSelectedControl
                 AbsoluteLayout.SetLayoutBounds(this,
                     new Rectangle(0, DeviceInfo.Height - 300, AbsoluteLayout.AutoSize, 300));
             });
+
+            ShowWeakAction?.Execute();
         }
 
         public void Hide()
@@ -52,6 +58,8 @@ namespace XamarinFormsDemo.Controls.AreaSelectedControl
                 AbsoluteLayout.SetLayoutBounds(this,
                     new Rectangle(0, DeviceInfo.Height, AbsoluteLayout.AutoSize, 300));
             });
+
+            HideWeakAction?.Execute();
         }
 
         #endregion
@@ -68,6 +76,7 @@ namespace XamarinFormsDemo.Controls.AreaSelectedControl
             if (SelectedCallBack != null && SelectedCallBack.IsAlive)
             {
                 SelectedCallBack.ExecuteWithObject(result);
+                Hide();
             }
         }
 

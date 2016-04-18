@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Helper;
 using XamarinFormsDemo.Models.APIModels;
@@ -46,7 +48,19 @@ namespace XamarinFormsDemo.ViewModels
         {
             SelectedAddressCommand = new RelayCommand(SelectedAddressCommandHandler);
 
-            SetBaiduPosition();
+            if (!string.IsNullOrEmpty(PositionHelper.Address))
+            {
+                Address = PositionHelper.Address;
+            }
+            else
+            {
+                SetBaiduPosition();
+            }
+
+            Messenger.Default.Register<string>(this, MessengeToken.SearchCallBack, (s) =>
+            {
+                Address = s;
+            });
         }
 
         #endregion
@@ -77,7 +91,7 @@ namespace XamarinFormsDemo.ViewModels
                 try
                 {
                     var api =
-                        $"http://api.map.baidu.com/geocoder/v2/?ak={AppInfo.BaiduMapAk}&callback=renderReverse&location={position.Lng},{position.Lat}&output=json&pois=1";
+                        $"http://api.map.baidu.com/geocoder/v2/?ak={AppInfo.BaiduMapAk}&location={position.Lat},{position.Lng}&output=json&pois=1";
 
                     using (var httpClient = new HttpClient())
                     {
@@ -88,8 +102,13 @@ namespace XamarinFormsDemo.ViewModels
                             var json = await response.Content.ReadAsStringAsync();
 
                             var objResluts = JsonConvert.DeserializeObject<BaiduJsonGetAddressFromPosition>(json);
+                            if (!string.IsNullOrEmpty(objResluts?.Result.Formatted_Address))
+                            {
+                                Address = objResluts.Result.Formatted_Address;
+                                //PositionHelper.Address = Address;
 
-                            
+                                PositionHelper.City = objResluts.Result.AddressComponent.City;
+                            }
                         }
                     }
                 }

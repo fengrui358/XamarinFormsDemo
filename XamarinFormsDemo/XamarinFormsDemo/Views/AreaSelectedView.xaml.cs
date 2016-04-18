@@ -50,7 +50,7 @@ namespace XamarinFormsDemo.Views
 
             _boxView = new BoxView
             {
-                BackgroundColor = Color.FromRgba(128,128,128, 50),
+                BackgroundColor = Color.FromRgba(128,128,128, 100),
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 IsVisible = false
@@ -66,7 +66,6 @@ namespace XamarinFormsDemo.Views
 
         private void ShowSelectedPane()
         {
-            _boxView.IsVisible = true;
             _areaSelectedPlane?.Show();
         }
 
@@ -82,6 +81,16 @@ namespace XamarinFormsDemo.Views
 
             absoluteLayout.Children.Add(_areaSelectedPlane);
 
+            _areaSelectedPlane.ShowWeakAction = new WeakAction(() =>
+            {
+                _boxView.IsVisible = true;
+            });
+
+            _areaSelectedPlane.HideWeakAction = new WeakAction(() =>
+            {
+                _boxView.IsVisible = false;
+            });
+
             base.OnAppearing();
         }
 
@@ -90,9 +99,6 @@ namespace XamarinFormsDemo.Views
             Device.BeginInvokeOnMainThread(() =>
             {
                 _label.Text = result;
-
-                _boxView.IsVisible = false;
-                _areaSelectedPlane.Hide();
             });
         }
 

@@ -20,7 +20,10 @@
 </html>
 <script type="text/javascript">
     //百度地图API功能
-    function loadJScript() {
+    function loadJScript(x, y) {
+        pointsX = x;
+        pointsY = y;
+
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.src = "http://api.map.baidu.com/api?v=2.0&ak=7rpFWBNykAOFEPs0NEnH3WSs&callback=init";
@@ -29,6 +32,13 @@
 
     function init() {
         map = new BMap.Map("allmap");            // 创建Map实例
+
+        //if (pointsX == null || pointsX <= 0) {
+        //    var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+        //} else {
+        //    var point = new BMap.Point(pointsY, pointsX); // 创建点坐标
+        //    //addMarker(pointsY, pointsX);
+        //}
         var point = new BMap.Point(116.404, 39.915); // 创建点坐标
         map.centerAndZoom(point, 11);
         map.addControl(new BMap.MapTypeControl());   //添加地图类型控件

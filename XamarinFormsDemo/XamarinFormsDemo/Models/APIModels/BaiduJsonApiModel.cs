@@ -66,15 +66,20 @@ namespace XamarinFormsDemo.Models.APIModels
     {
         public int Status { get; set; }
 
+        public BaiduJsonGetAddressFromPositionResult Result { get; set; }
+    }
+
+    public class BaiduJsonGetAddressFromPositionResult
+    {
         public LocationModel Location { get; set; }
 
         public string Formatted_Address { get; set; }
 
-        public int Sematic_Description { get; set; }
+        public string Sematic_Description { get; set; }
 
         public AddressComponent AddressComponent { get; set; }
 
-        public Pois Pois { get; set; }
+        public List<Pois> Pois { get; set; }
     }
 
     public class AddressComponent

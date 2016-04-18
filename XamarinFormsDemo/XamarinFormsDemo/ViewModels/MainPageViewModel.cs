@@ -41,7 +41,7 @@ namespace XamarinFormsDemo.ViewModels
             }
             else if (parm == typeof (BaiduMapView))
             {
-                await navigationPage.PushAsync(new BaiduMapView());
+                //await navigationPage.PushAsync(new BaiduMapView());
             }
             else if (parm == typeof (AreaSelectedView))
             {

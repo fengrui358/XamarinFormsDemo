@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using Xamarin.Forms;
 using XamarinFormsDemo.Const;
 using XamarinFormsDemo.Models.APIModels;
 
@@ -15,6 +16,23 @@ namespace XamarinFormsDemo.Helper
 {
     public class PositionHelper
     {
+        public static string Address { get; set; }
+
+        public static string City { get; set; }
+
+        //static PositionHelper()
+        //{
+        //    if (Application.Current.Properties.ContainsKey(nameof(Address)))
+        //    {
+        //        Address = Application.Current.Properties[nameof(Address)].ToString();
+        //    }
+
+        //    if (Application.Current.Properties.ContainsKey(nameof(City)))
+        //    {
+        //        City = Application.Current.Properties[nameof(City)].ToString();
+        //    }
+        //}
+
         public async static Task<Position> GetNativePosition()
         {
             try
@@ -22,7 +40,7 @@ namespace XamarinFormsDemo.Helper
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
 
-                var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+                var position = await locator.GetPositionAsync(timeoutMilliseconds: 10*1000);
 
                 return position;
             }

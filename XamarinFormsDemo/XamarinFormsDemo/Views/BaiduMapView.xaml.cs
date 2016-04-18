@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Newtonsoft.Json;
@@ -25,16 +26,22 @@ namespace XamarinFormsDemo.Views
         private Entry _searchEntry;
 
         private HybridWebView _hybirdWeb;
-        private Entry _registerEntry;
+        private StackLayout _registerEntry;
+
+        private Entry _houseNumber;
+
+        private SearchSuggestModel _searchSuggestModel;
 
         #endregion
 
 
         #region 构造
 
-        public BaiduMapView()
+        public BaiduMapView(SearchSuggestModel searchSuggestModel)
         {
             InitializeComponent();
+
+            _searchSuggestModel = searchSuggestModel;
 
             //todo:使用xaml构建该页面
             _absoluteLayout = new AbsoluteLayout
@@ -58,20 +65,28 @@ namespace XamarinFormsDemo.Views
                 BackgroundColor = Color.White,
                 Placeholder = "搜索"
             };
-            _searchEntry.Focused += SearchEntryOnFocused;
+            //_searchEntry.Focused += SearchEntryOnFocused;
 
             _absoluteLayout.Children.Add(_searchEntry,
                 new Rectangle(20, 35, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
 
             Content = _absoluteLayout;
 
-            Messenger.Default.Register<SearchSuggestModel>(this, MessengeToken.SearchCallBack, SearchKeyWordCallBack);
+            //Messenger.Default.Register<SearchSuggestModel>(this, MessengeToken.SearchCallBack, SearchKeyWordCallBack);
+            //_hybirdWeb.InvokeJsFunction("loadJScript", null, _searchSuggestModel.Lng, _searchSuggestModel.Lat);
         }
 
         #endregion
 
 
         #region 私有方法
+
+        protected override void OnAppearing()
+        {           
+            SearchKeyWordCallBack(_searchSuggestModel);
+
+            base.OnAppearing();
+        }
 
         private async void SearchEntryOnFocused(object sender, FocusEventArgs focusEventArgs)
         {
@@ -94,17 +109,39 @@ namespace XamarinFormsDemo.Views
 
                     if (location != null)
                     {
-                        //todo:定位
-                        _hybirdWeb.InvokeJsFunction("addMarker", null, location.Lng, location.Lat);
+                        await Task.Run(async () =>
+                        {
+                            await Task.Delay(800);
+
+                            //Device.BeginInvokeOnMainThread(() =>
+                            //{
+                            _hybirdWeb.InvokeJsFunction("addMarker", null, location.Lng, location.Lat);
+                            //});
+                        });
                     }
 
                     //弹出门牌号输入
-                    _registerEntry = new Entry
+                    _registerEntry = new StackLayout
+                    {
+                        Orientation = StackOrientation.Horizontal
+                    };
+                    
+                    _houseNumber = new Entry
                     {
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         BackgroundColor = Color.White,
                         Placeholder = "楼号/门牌号"
                     };
+
+                    var button = new Button
+                    {
+                        Text = "确定",
+                        HorizontalOptions = LayoutOptions.End,
+                        Command = new RelayCommand(CallBack)
+                    };
+
+                    _registerEntry.Children.Add(_houseNumber);
+                    _registerEntry.Children.Add(button);
 
                     _absoluteLayout.Children.Add(_registerEntry,
                         new Rectangle(20, 35 + 15 + _searchEntry.Height, DeviceInfo.Width - 40, AbsoluteLayout.AutoSize));
@@ -141,10 +178,19 @@ namespace XamarinFormsDemo.Views
                 else
                 {
                     var encodekeyWord = StringHelper.UrlEncode(searchSuggestModel.KeyWords);
+                    var city = string.Empty;
+                    if (!string.IsNullOrEmpty(PositionHelper.City))
+                    {
+                        city = PositionHelper.City;
+                    }
+                    else
+                    {
+                        city = "131";
+                    }
 
                     //todo:修改范围
                     var api =
-                        $"http://api.map.baidu.com/place/v2/search?query={encodekeyWord}&page_size=1&page_num=0&scope=1&region=131&output=json&ak={AppInfo.BaiduMapAk}";
+                        $"http://api.map.baidu.com/place/v2/search?query={encodekeyWord}&page_size=1&page_num=0&scope=1&region={city}&output=json&ak={AppInfo.BaiduMapAk}";
 
                     using (var httpClient = new HttpClient())
                     {
@@ -170,7 +216,15 @@ namespace XamarinFormsDemo.Views
             return null;
         }
 
-        #endregion
+        private async void CallBack()
+        {
+            PositionHelper.Address = $"{_searchEntry.Text}{_houseNumber.Text}";
+            Messenger.Default.Send(PositionHelper.Address, MessengeToken.SearchCallBack);
 
+            await IocHelper.GetNavigationPage().PopAsync();
+            await IocHelper.GetNavigationPage().PopAsync();
+        }
+
+        #endregion
     }
 }
