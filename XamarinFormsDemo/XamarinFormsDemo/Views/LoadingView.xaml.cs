@@ -34,29 +34,30 @@ namespace XamarinFormsDemo.Views
                     }
                     else
                     {
-                        if (SimpleIoc.Default.IsRegistered<MainPageView>())
+
+
+                        if (SimpleIoc.Default.IsRegistered<NavigationPage>(typeof (MainPageView).ToString()))
                         {
-                            Application.Current.MainPage = IocHelper.GetNavigationPage();
+                            //Application.Current.MainPage = IocHelper.GetNavigationPage();
+                            SimpleIoc.Default.Unregister<NavigationPage>(typeof (MainPageView).ToString());
                         }
-                        else
+
+                        var mainPage = new NavigationPage(new CarouselImageView());
+
+                        if (Device.OS == TargetPlatform.iOS)
                         {
-                            var mainPage = new NavigationPage(new CarouselImageView());
-
-                            if (Device.OS == TargetPlatform.iOS)
-                            {
-                                mainPage.BarBackgroundColor = Color.White;
-                                mainPage.BarTextColor = Color.Black;
-                            }
-                            else if (Device.OS == TargetPlatform.Android)
-                            {
-                                mainPage.BarBackgroundColor = Color.Black;
-                                mainPage.BarTextColor = Color.White;
-                            }
-
-                            SimpleIoc.Default.Register(() => mainPage, typeof(MainPageView).ToString());
-
-                            Application.Current.MainPage = mainPage;
+                            mainPage.BarBackgroundColor = Color.White;
+                            mainPage.BarTextColor = Color.Black;
                         }
+                        else if (Device.OS == TargetPlatform.Android)
+                        {
+                            mainPage.BarBackgroundColor = Color.Black;
+                            mainPage.BarTextColor = Color.White;
+                        }
+
+                        SimpleIoc.Default.Register(() => mainPage, typeof (MainPageView).ToString());
+
+                        Application.Current.MainPage = mainPage;
                     }
                 });
             });

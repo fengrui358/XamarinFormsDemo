@@ -56,7 +56,10 @@ namespace XamarinFormsDemo.Droid.Renderers
             }
             if (e.PropertyName == CarouselLayout.SelectedIndexProperty.PropertyName && !_motionDown)
             {
-                ScrollToIndex(((CarouselLayout)this.Element).SelectedIndex);
+                if (Element != null)
+                {
+                    ScrollToIndex(((CarouselLayout)this.Element).SelectedIndex);
+                }
             }
         }
 
