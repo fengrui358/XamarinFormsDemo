@@ -179,8 +179,12 @@ namespace XamarinFormsDemo.ViewModels
             if (SelectedItem != null)
             {
                 result.KeyWords = SelectedItem.Name;
-                result.Lat = SelectedItem.Location.Lat;
-                result.Lng = SelectedItem.Location.Lng;
+
+                if (SelectedItem.Location != null)
+                {
+                    result.Lat = SelectedItem.Location.Lat;
+                    result.Lng = SelectedItem.Location.Lng;
+                }
             }
             else
             {
